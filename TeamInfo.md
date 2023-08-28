@@ -6,14 +6,14 @@
 | ----------- | ---------------------- |
 | TeamID      |        Team-041        |
 | TeamName    |          LABO          |
-| Captain     |                        |
-| Captain     |                        |
+| Captain     |       Yuteng Gao       |
+| Captain     |  yutengg2@illinois.edu |
 | Member1     |       Xinzhe Miao      |
 | Member1     |  xinzhem2@illinois.edu |
 | Member2     |       Yihan Jiang      |
 | Member2     |  yihanj4@illinois.edu  |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |       Serena Gong      |
+| Member3     |  sxgong2@illinois.edu  |
 
 ## Project Information
 
