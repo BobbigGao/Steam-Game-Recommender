@@ -39,7 +39,11 @@ The core function of our web application lets users search for games by name, ge
 ## Project Work Distribution
 
 The team will collectively work on backend and frontend, so we can all expand out full-stack abilities. However, we will be working individually to complete certain functionalities.
+
 Xinzhe Miao: User authentication, account login and logout feature
+
 Serena Gong: Game reccomendation algorithm, search bar and filtering functionalities
+
 Yuteng Gao: Popular games functionality, ability to save liked/disliked games into list
+
 Yihan Jiang: Game review and community feedback feature
