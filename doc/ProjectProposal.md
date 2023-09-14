@@ -32,9 +32,9 @@ The core function of our web application lets users search for games by name, ge
 
 ## Low Fidelity UI Mockup
 
-![UI_mockup1](./figures/ui_mockup1.png)
-![UI_mockup2](./figures/ui_mockup2.png)
-![UI_mockup3](./figures/ui_mockup3.png)
+![UI_mockup1](./images/ui_mockup1.png)
+![UI_mockup2](./images/ui_mockup2.png)
+![UI_mockup3](./images/ui_mockup3.png)
 
 ## Project Work Distribution
 
