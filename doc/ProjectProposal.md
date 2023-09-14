@@ -88,7 +88,7 @@ C. Game Recommendation Function:
 - Purpose: To recommend games to a player based on specified criteria such as game price, multiplayer options, currency, platform compatibility, and release date.
 - Description:
     - The function starts by validating the input parameters. If any of the inputs are not valid, it returns an error message. Next, the function constructs a query to filter the game dataset based on the provided criteria. If a criterion is not provided, the function will not filter based on that criterion. For example, if no platform is provided, the function will return games for all platforms. The function will then sort the results based on relevance and other potential metrics like game ratings or popularity.
-- Finally, it returns the top numRecommendations games (default could be set to 10 or any other number) that match the provided criteria.
+    - Finally, it returns the top numRecommendations games (default could be set to 10 or any other number) that match the provided criteria.
 
 D. Popular Games Tendency
 - Function Name: Popular Games Tendency
