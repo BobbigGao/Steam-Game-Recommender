@@ -148,4 +148,6 @@ Design and develop the UI for game review, rating, and detailed game description
 
 7. Database Development (Xinzhe Miao):
 Analyze the game dataset to identify necessary tables and relationships and Establish relationships and constraints to maintain data integrity.
+Create tables like Users, Games, Reviews, and others to accommodate all the data fields.
+
 
