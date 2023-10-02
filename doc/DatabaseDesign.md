@@ -4,8 +4,23 @@
 
 ## Entities
 We have a total of 7 entities for our database design, and each is explained as follows
-### 1. xxx
-### 2. xxx
+
+### 1. UserInfo
+This is an entity regarding each user and their login information
+1. **UserID**: a unique identifier to distinguish between users. It will be a string attribute and a primary key for this table,
+2. **UserName**: a self selected username by the user, a string attribute
+3. **Password**: a password created by the user, a string attribute
+
+This entity is designed with the following assumptions:
+1. Every user in the platform has unique UserID that cannot be modified.
+2. Users can change their password, which will result in an update operation for this table.
+3. Users cannot change their username
+4. Once user has entered their username, password, and clicked log in, they will be redirected to the home page.
+
+### 2. GameInfo
+This is an entity regarding each game and their necessary information. 
+1. **QueryID**: 
+
 
 ## Relations
 
@@ -49,7 +64,7 @@ Popularity(
 ```mysql
 Reviews(
     CommentID VARCHAR(255) [PK],
-    UserName VARCHAR(255) [FK],
+    UserName VARCHAR(255) [FK to UserInfo.UserName],
     QueryID VARCHAR(255) [FK],
     CommentText VARCHAR(255),
     RatingDate VARCHAR(255)
