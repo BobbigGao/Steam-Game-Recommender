@@ -128,12 +128,24 @@ H. Game Review & Community Feedback
 
 ## Project Work Distribution
 
-The team will collectively work on backend and frontend, so we can all expand out full-stack abilities. However, we will be working individually to complete certain functionalities.
+The team will work collaboratively on backend and frontend, so we can all expand our full-stack abilities. However, we will be reponsible individually for the following components.
 
-Xinzhe Miao: User authentication, account login and logout feature
+1. Backend Development (Yuteng Gao):
+Handle user authentication (login and registration).
+Implement the recommendGames function to provide personalized game recommendations.
+Implement the Popular Games Tendency function to return the most popular games based on release date and category.
 
-Serena Gong: Game reccomendation algorithm, search bar and filtering functionalities
+3. Backend Development (Yihan Jiang):
+Implement the findGame function to search, filter, and sort games.
+Implement the saveGame function to allow users to save games.
+Implement the Review your Game function to handle game reviews.
+Implement the Game Description function to provide detailed game information to users.
 
-Yuteng Gao: Popular games functionality, ability to save liked/disliked games into list
+5. Frontend Development (Serena Gong):
+Develop the user registration, login, and game recommendation UI.
+Implement UI for game search, filter, and sorting.
+Design and develop the UI for game review, rating, and detailed game description.
 
-Yihan Jiang: Game review and community feedback feature
+7. Database Development (Xinzhe Miao):
+Analyze the game dataset to identify necessary tables and relationships and Establish relationships and constraints to maintain data integrity.
+
