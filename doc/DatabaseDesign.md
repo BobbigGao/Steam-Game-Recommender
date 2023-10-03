@@ -157,6 +157,53 @@ This entity is designed with the following assumptions:
 - Belong is a many-to-many relation between ```GameInfo``` and ```Genre```. 
 - Assumption: A game may belong to different genre categories. In one genre, there are many different games.
 
+## 3NF Normalization
+3NF focuses on ensuring that every non-prime attribute (an attribute that is not part of any candidate key) is fully functionally dependent  on the primary key and that there are no transitive dependencies. We choose to use 3NF because our schema is in 3NF. 
+
+**Functional Dependencies (FDs) for each table:**
+
+- GameInfo:
+QueryID→QueryName, ReleaseDate, PriceFinal, HeaderImage, DetailedDescrip, SupportedLanguages, SteamPlayerEstimate
+
+- Recommendation:
+RecommendationID→QueryID, RecommendationCount
+
+- UserInfo:
+UserID→UserName, Password
+
+- Reviews:
+CommentID→UserName, QueryID, CommentText, RatingDate
+
+- MyList:
+ListID→QueryID, UserID
+
+- CategoryInfo:
+CategoryID→QueryID, CategorySinglePlayer, CategoryMultiplayer, CategoryCoop, CategoryMMO
+
+- Platform:
+PlatformID→QueryID, PlatformWindows, PlatformLinux, PlatformMac
+
+- Genre:
+GenreID→QueryID, GenrelsNonGame, GenrelsIndie, GenrelsAction, GenrelsAdventure, GenrelsCasual, GenrelsStrategy, GenrelsRPG, GenrelsSimulation, GenrelsRacing
+
+**3NF Analysis:**
+- GameInfo: All non-key attributes are functionally dependent only on the primary key, QueryID. There are no partial or transitive dependencies.
+
+- Recommendation: All attributes depend solely on the primary key, RecommendationID. 
+UserInfo: All attributes depend solely on the primary key, UserID.
+
+- Reviews: All non-key attributes are functionally dependent only on the primary key, CommentID. 
+
+- MyList: All attributes depend solely on the primary key, ListID. 
+
+- CategoryInfo: All non-key attributes are functionally dependent only on the primary key, CategoryID. 
+
+- Platform: All non-key attributes are functionally dependent only on the primary key, PlatformID. 
+
+- Genre: All non-key attributes are functionally dependent only on the primary key, GenreID.
+
+**3NF Result:**
+Given the functional dependencies and the structure of each table, all tables in the schema adhere to the 3NF requirements. All non-key attributes are fully functionally dependent on the primary key, and there are no transitive dependencies in the schema.
 
 ## Relational Schema
 Here we will convert the database design into 11 tables
