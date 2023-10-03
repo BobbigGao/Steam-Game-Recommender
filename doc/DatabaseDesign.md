@@ -240,7 +240,7 @@ Recommendation(
 )
 ```
 
-**3. Reviews**
+**4. Reviews**
 ```mysql
 Reviews(
     commentID VARCHAR(255) [PK],
@@ -251,7 +251,7 @@ Reviews(
 )
 ```
 
-**4. MyList**
+**5. MyList**
 ```mysql
 MyList(
     listID VARCHAR(255) [PK],
@@ -260,7 +260,7 @@ MyList(
 )
 ```
 
-**5. Genre**
+**6. Genre**
 ```mysql
 Genre(
     genreID VARCHAR(255) [PK],
@@ -276,7 +276,7 @@ Genre(
 )
 ```
 
-**6. Platform**
+**7. Platform**
 ```mysql
 Platform(
     platformID VARCHAR(255) [PK],
@@ -286,7 +286,7 @@ Platform(
     platformMac BOOLEAN
 )
 ```
-**7. CategoryInfo**
+**8. CategoryInfo**
 ```mysql
 CategoryInfo(
     categoryID VARCHAR(255) [PK]
