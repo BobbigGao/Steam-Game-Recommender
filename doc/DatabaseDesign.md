@@ -8,9 +8,9 @@ We have a total of 8 entities for our database design, and each is explained as 
 
 ### 1. UserInfo
 This is an entity regarding each user and their login information
-1. **UserID**: a unique identifier to distinguish between users. It will be a string attribute and a primary key for this table,
-2. **UserName**: a self-selected username by the user, a string attribute
-3. **Password**: a password created by the user, a string attribute
+1. **userID**: a unique identifier to distinguish between users
+2. **userName**: a self-selected username by the user, a string attribute
+3. **password**: a password created by the user, a string attribute
 
 This entity is designed with the following assumptions:
 1. Every user in the platform has a unique UserID that cannot be modified.
@@ -20,7 +20,70 @@ This entity is designed with the following assumptions:
 
 ### 2. GameInfo
 This is an entity regarding each game and its necessary information. 
-1. **QueryID**: 
+1. **queryID**: a unique identifier to distinguish between games
+2. **queryName**: the name for every game, a string attribute
+3. **releaseDate**: the release date for a game, a string attribute
+4. **priceFinal**: the cost of a game, a float attribute
+5. **headerImage**: the link for an image of the game, a string attribute
+6. **detailedDescription**: a description of the game, a string attribute
+7. **supportedLangauges**: a list of languages the game supports, a string attribute
+8. **steamPlayerEstimate**: the number of players for the steam game, utilised as popularity, an int attribute
+
+### 3. Recommendation
+This is an entity where users can get recommendations for a game. 
+1. **recommendationID**: a unique identifier to distinguish each recommendation
+2. **queryID**: a unique identifier to distinguish between games
+3. **recommendationCount**: the number of recommendations given by users in dataset, an int attribute
+
+### 4. Reviews
+This is an entity for users writing reviews about a game.
+1. **commentID**: a unique identifier for every comment
+2. **userID**: a unique identifier to distinguish between users
+3. **queryID**: a unique identifier to distinguish between games
+4. **commentText**: the review given by a user, a string attribute
+5. **ratingDate**: the date of the review given by user, a string attribute
+
+### 5. MyList
+This is an entity a user's saved list of games.
+1. **listID**: a unique identifier for every users list
+2. **queryID**: a unique identifier to distinguish between games
+3. **userID**: a unique identifier to distinguish between users
+
+This entity is designed wwith the following assumptions:
+1. Every user only has one list
+
+### 6. Genre
+This is an entity about a games' genres
+1. **genreID**: a unique identifier for the games' genres
+2. **queryID**: a unique identifier to distinguish between games
+3. **genresIndie**: if a game is indie or not, a boolean attribute
+4. **genresAction**: if a game is action or not, a boolean attribute
+5. **genresAdventure**: if a game is adventure or not, a boolean attribute
+6. **genresCasual**: if a game is casual or not, a boolean attribute
+7. **genresStrategy**: if a game is strategy or not, a boolean attribute
+8. **genresRPG**: if a game is rpg or not, a boolean attribute
+9. **genresSimulation**: if a game simulation or not, a boolean attribute
+10. **genresRacing**: if a game is racing or not, a boolean attribute
+
+### 7. Platform
+This is an entity about what platforms a game supports
+1. **platformID**: a unique identifier for a games' supported platforms
+2. **queryID**: a unique identifier to distinguish between games
+3. **platformWindows**: if a game works on windows, a boolean attribute
+4. **platformLinux**: if a game works on linux, a boolean attribute
+5. **platformMac**: if a game works on mac, a boolean attribute
+
+This entity is designed with the following assumptions:
+1. Every game can have more than one supported platform
+
+### 8. CategoryInfo
+This is an entity about the play styles of the game 
+1. **categoryID**: a unique identifier for a games' supported categories
+2. **queryID**: a unique identifier to distinguish between games
+3. **categorySinglePlayer**: if a game has single player functionality, a boolean attribute
+4. **categoryMultiplayer**: if a game has multiplayer functionality, a boolean attribute
+5. **categoryCoop** if a game has co-op functionality, a boolean attribute
+6. **categoryMMO**: if a game has MMO functionality, a boolean attribute
 
 
 ## Relations
