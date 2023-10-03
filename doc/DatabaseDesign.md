@@ -6,7 +6,7 @@
 ## Entities
 We have a total of 8 entities for our database design, and each is explained as follows
 
-### 1. UserInfo
+#### 1. UserInfo
 This is an entity regarding each user and their login information
 1. **userID**: a unique identifier to distinguish between users
 2. **userName**: a self-selected username by the user, a string attribute
@@ -18,7 +18,7 @@ This entity is designed with the following assumptions:
 3. Users cannot change their username
 4. Once the user has entered their username, and password, and clicked login, they will be redirected to the home page.
 
-### 2. GameInfo
+#### 2. GameInfo
 This is an entity regarding each game and its necessary information. 
 1. **queryID**: a unique identifier to distinguish between games
 2. **queryName**: the name for every game, a string attribute
@@ -29,13 +29,13 @@ This is an entity regarding each game and its necessary information.
 7. **supportedLangauges**: a list of languages the game supports, a string attribute
 8. **steamPlayerEstimate**: the number of players for the steam game, utilised as popularity, an int attribute
 
-### 3. Recommendation
+#### 3. Recommendation
 This is an entity where users can get recommendations for a game. 
 1. **recommendationID**: a unique identifier to distinguish each recommendation
 2. **queryID**: a unique identifier to distinguish between games
 3. **recommendationCount**: the number of recommendations given by users in dataset, an int attribute
 
-### 4. Reviews
+#### 4. Reviews
 This is an entity for users writing reviews about a game.
 1. **commentID**: a unique identifier for every comment
 2. **userID**: a unique identifier to distinguish between users
@@ -43,7 +43,7 @@ This is an entity for users writing reviews about a game.
 4. **commentText**: the review given by a user, a string attribute
 5. **ratingDate**: the date of the review given by user, a string attribute
 
-### 5. MyList
+#### 5. MyList
 This is an entity a user's saved list of games.
 1. **listID**: a unique identifier for every users list
 2. **queryID**: a unique identifier to distinguish between games
@@ -52,7 +52,7 @@ This is an entity a user's saved list of games.
 This entity is designed wwith the following assumptions:
 1. Every user only has one list
 
-### 6. Genre
+#### 6. Genre
 This is an entity about a games' genres
 1. **genreID**: a unique identifier for the games' genres
 2. **queryID**: a unique identifier to distinguish between games
@@ -65,7 +65,7 @@ This is an entity about a games' genres
 9. **genresSimulation**: if a game simulation or not, a boolean attribute
 10. **genresRacing**: if a game is racing or not, a boolean attribute
 
-### 7. Platform
+#### 7. Platform
 This is an entity about what platforms a game supports
 1. **platformID**: a unique identifier for a games' supported platforms
 2. **queryID**: a unique identifier to distinguish between games
@@ -76,7 +76,7 @@ This is an entity about what platforms a game supports
 This entity is designed with the following assumptions:
 1. Every game can have more than one supported platform
 
-### 8. CategoryInfo
+#### 8. CategoryInfo
 This is an entity about the play styles of the game 
 1. **categoryID**: a unique identifier for a games' supported categories
 2. **queryID**: a unique identifier to distinguish between games
