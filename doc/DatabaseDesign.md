@@ -194,7 +194,6 @@ MyList(
 Genre(
     genreID VARCHAR(255) [PK],
     queryID VARCHAR(255) [FK to GameInfo.queryID],
-    genrelsNonGame BOOLEAN,
     genrelsIndie BOOLEAN,
     genrelsAction BOOLEAN,
     genrelsAdventure BOOLEAN,
