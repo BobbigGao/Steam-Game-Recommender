@@ -297,15 +297,3 @@ CategoryInfo(
     categoryMMO BOOLEAN
 )
 ```
-
-## MySQL DDL Commands
-
-```mysql
-# Entities
-
-CREATE TABLE UserInfo (
-    UserID VARCHAR(255) PRIMARY KEY,
-    UserName VARCHAR(255),
-    UserEmail VARCHAR(255),
-    Password VARCHAR(255)
-);
