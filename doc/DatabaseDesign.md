@@ -4,7 +4,7 @@
 ![UML_new](./images/UML_new.png)
 
 ## Entities
-We have a total of 7 entities for our database design, and each is explained as follows
+We have a total of 8 entities for our database design, and each is explained as follows
 
 ### 1. UserInfo
 This is an entity regarding each user and their login information
