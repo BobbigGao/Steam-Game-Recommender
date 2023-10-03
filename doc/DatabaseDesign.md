@@ -71,95 +71,97 @@ This is an entity regarding each game and their necessary information.
 - Assumption: A game has different genre categories. In one genre, there are many different games.
 
 
-
 ## Relational Schema
 Here we will convert the database design into 11 tables
 
 **1. UserInfo**
 ```mysql
 UserInfo(
-    UserID VARCHAR(255) [PK],
-    UserName VARCHAR(255),
-    Password VARCHAR(255),
-    UserEmail VARCHAR(255)
+    userID VARCHAR(255) [PK],
+    userName VARCHAR(255),
+    password VARCHAR(255),
 )
 ```
 
 **2. GameInfo**
 ```mysql
 GameInfo(
-    QueryID VARCHAR(255) [PK],
-    QueryName VARCHAR(255),
-    ReleaseDate VARCHAR(255),
-    PriceFinal FLOAT,
-    HeaderImage VARCHAR(255),
-    DetailedDescription VARCHAR(255),
-    SupportedLanguages VARCHAR(255),
-    Popularity INT
+    queryID VARCHAR(255) [PK],
+    queryName VARCHAR(255),
+    releaseDate VARCHAR(255),
+    priceFinal FLOAT,
+    headerImage VARCHAR(255),
+    detailedDescrip VARCHAR(255),
+    supportedLanguages VARCHAR(255),
+    steamspyplayerestimate INT
 )
 ```
 
-**3. Populaity**
+**3. Recommendation**
 ```mysql
-Popularity(
-    QueryID VARCHAR(255) [PK],
-    QueryName VARCHAR(255),
-    RecommendationCount INT
+Recommendation(
+    recommendationID VARCHAR(255) [PK],
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    recommendationCount INT
 )
 ```
 
 **3. Reviews**
 ```mysql
 Reviews(
-    CommentID VARCHAR(255) [PK],
-    UserName VARCHAR(255) [FK to UserInfo.UserName],
-    QueryID VARCHAR(255) [FK],
-    CommentText VARCHAR(255),
-    RatingDate VARCHAR(255)
+    commentID VARCHAR(255) [PK],
+    userID VARCHAR(255) [FK to UserInfo.userID],
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    commentText VARCHAR(255),
+    ratingDate VARCHAR(255)
 )
 ```
 
 **4. MyList**
 ```mysql
 MyList(
-    QueryID VARCHAR(255) [PK],
-    QueryName VARCHAR(255)
+    listID VARCHAR(255) [PK],
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    userID VARCHAR(255) [FK to UserInfo.userID]
 )
 ```
 
 **5. Genre**
 ```mysql
 Genre(
-    QueryID VARCHAR(255) [PK],
-    GenrelsNonGame BOOLEAN,
-    GenrelsIndie BOOLEAN,
-    GenrelsAction BOOLEAN,
-    GenrelsAdventure BOOLEAN,
-    GenrelsCasual BOOLEAN,
-    GenrelsStrategy BOOLEAN,
-    GenrelsRPG BOOLEAN,
-    GenrelsSimulation BOOLEAN,
-    GenrelsRacing BOOLEAN
+    genreID VARCHAR(255) [PK],
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    genrelsNonGame BOOLEAN,
+    genrelsIndie BOOLEAN,
+    genrelsAction BOOLEAN,
+    genrelsAdventure BOOLEAN,
+    genrelsCasual BOOLEAN,
+    genrelsStrategy BOOLEAN,
+    genrelsRPG BOOLEAN,
+    genrelsSimulation BOOLEAN,
+    genrelsRacing BOOLEAN
 )
 ```
 
 **6. Platform**
 ```mysql
 Platform(
-    QueryID VARCHAR(255) [PK],
-    PlatformWindows BOOLEAN,
-    PlatformLinux BOOLEAN,
-    PlatformMac BOOLEAN
+    platformID VARCHAR(255) [PK],
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    platformWindows BOOLEAN,
+    platformLinux BOOLEAN,
+    platformMac BOOLEAN
 )
 ```
 **7. CategoryInfo**
 ```mysql
 CategoryInfo(
-    QueryID VARCHAR(255) [PK],
-    CategorySinglePlayer BOOLEAN,
-    CategoryMultiplayer BOOLEAN, 
-    CategoryCoop BOOLEAN,
-    CategoryMMO BOOLEAN
+    categoryID VARCHAR(255) [PK]
+    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    categorySinglePlayer BOOLEAN,
+    categoryMultiplayer BOOLEAN, 
+    categoryCoop BOOLEAN,
+    categoryMMO BOOLEAN
 )
 ```
 
@@ -174,6 +176,5 @@ CREATE TABLE UserInfo (
     UserEmail VARCHAR(255),
     Password VARCHAR(255)
 );
-
 
 
