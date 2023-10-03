@@ -171,10 +171,10 @@ CategoryInfo(
 # Entities
 
 CREATE TABLE UserInfo (
-    UserID VARCHAR(255) PRIMARY KEY,
-    UserName VARCHAR(255),
-    UserEmail VARCHAR(255),
-    Password VARCHAR(255)
+    userID VARCHAR(255) PRIMARY KEY,
+    userName VARCHAR(255),
+    userEmail VARCHAR(255),
+    password VARCHAR(255)
 );
 
 
