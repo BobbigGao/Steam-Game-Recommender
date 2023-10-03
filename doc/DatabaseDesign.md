@@ -1,7 +1,7 @@
 # Database Design
 
 ## UML diagram
-![UML](E:\Study\UIUC\Fall2023\CS411\Project\UML.png)
+![UML_new](./images/UML_new.png)
 
 ## Entities
 We have a total of 7 entities for our database design, and each is explained as follows
