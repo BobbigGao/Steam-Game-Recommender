@@ -24,9 +24,9 @@ This is an entity regarding each game and their necessary information.
 
 
 ## Relations
-**1. Create**
+**1. Check**
 
-- Create is a one-to-one relation between ```UserInfo``` and ```MyList```. User can create their own list to collect their favourite games.
+- Check is a one-to-one relation between ```UserInfo``` and ```MyList```. User can check their own list to collect their favourite games.
 - Assumption: Each user has only one favourite game list called “MyList”, and each list should correspond to one user.
 
 **2. Request**
@@ -36,8 +36,8 @@ This is an entity regarding each game and their necessary information.
 
 **3. Write**
 
-- Wrote is a one to zero or many relation between ```Reviews``` and ```UserInfo```. A user can write the reviews on the review.
-- Assumption: Users may write reviews. A user can write multiple reviews, but a review must belong to one user. 
+- Wrote is a one to zero or many relation between ```Reviews``` and ```GameInfo```. A user can write reviews for games.
+- Assumption: A user can write multiple reviews, but a review must belong to one user. 
 
 **4. Search**
 
@@ -49,27 +49,23 @@ This is an entity regarding each game and their necessary information.
 - Relate is a zero or one to one relation between ```Popularity``` and ```GameInfo```. The Popularity will recommend one of the most popular games and relate it with its game information.
 - Assumption: Each popularity recommendation relates to one game information. Each game information may or may not relate to one popular recommendation. 
 
-**6. Link**
+**6. Add**
 
-- Link is a one-to-many relation between ```MyList``` and ```GameInfo```. Users can find the corresponding game information in the game list.
+- Add is a one-to-many relation between ```MyList``` and ```GameInfo```. Users can find the corresponding game information in the game list.
 - Assumption: The MyList links to multiple game information. Each game information may or may not link to a list.
 
-**7. For**
 
-- For is a one-to-zero or many relation between ```Reviews``` and ```GameInfo```. The reviews are the feedback for each game.
-- Assumption: A game may not have a review or may have multiple reviews. A review must be for one game.
-
-**8. Include**
+**7. Include**
 
 - Include is a many-to-many relation between the ```GameInfo``` and ```CategoryInfo```. 
 - Assumption: A game may have multiple categories. In one category, there are many different games. 
 
-**9. Contain**
+**8. Contain**
 
 - Contain is a many-to-many relation between ```GameInfo``` and ```Platform```. 
 - Assumption: A platform contains many different games. A game can also contain many different supporting platforms. 
 
-**10. Have**
+**9. Have**
 
 - Have is a many-to-many relation between ```GameInfo``` and ```Genre```. 
 - Assumption: A game has different genre categories. In one genre, there are many different games.
