@@ -27,13 +27,24 @@ This is an entity regarding each game and its necessary information.
 5. **headerImage**: the link for an image of the game, a string attribute
 6. **detailedDescription**: a description of the game, a string attribute
 7. **supportedLangauges**: a list of languages the game supports, a string attribute
-8. **steamPlayerEstimate**: the number of players for the steam game, utilised as popularity, an int attribute
+8. **steamPlayerEstimate**: the number of players for the steam game, an int attribute
+
+This entity is designed with the following assumptions:
+1. Every game will have a unique ID, but might not have a unique name. 
+2. supportedLanguages might contain multiple languages seperated by a comma
+3. steamPlayerEstimate will be utilised in this project to gauge popularity
+        
 
 #### 3. Recommendation
 This is an entity where users can get recommendations for a game. 
 1. **recommendationID**: a unique identifier to distinguish each recommendation
 2. **queryID**: a unique identifier to distinguish between games
 3. **recommendationCount**: the number of recommendations given by users in dataset, an int attribute
+
+This entity is designed with the following assumptions:
+1. Every recommendation is uniqely linked to a specific game via queryID
+2. There will only be one game recommendation per recommendation request
+3. The recommendation algorithm is based off of recommendationCount from the dataset  
 
 #### 4. Reviews
 This is an entity for users writing reviews about a game.
@@ -43,14 +54,20 @@ This is an entity for users writing reviews about a game.
 4. **commentText**: the review given by a user, a string attribute
 5. **ratingDate**: the date of the review given by user, a string attribute
 
+This eneity is designed with the following assumptions:
+1. Every review is uniquely linked to a specific game via queryID
+2. Users can write many reviews for a game, and this is only in text form
+3. Each review is tied to a specific date 
+
 #### 5. MyList
 This is an entity a user's saved list of games.
 1. **listID**: a unique identifier for every users list
 2. **queryID**: a unique identifier to distinguish between games
 3. **userID**: a unique identifier to distinguish between users
 
-This entity is designed wwith the following assumptions:
-1. Every user only has one list
+This entity is designed with the following assumptions:
+1. Every user only has one distinct list
+2. Users can add multiple games to the distinct list
 
 #### 6. Genre
 This is an entity about a games' genres
@@ -65,6 +82,10 @@ This is an entity about a games' genres
 9. **genresSimulation**: if a game simulation or not, a boolean attribute
 10. **genresRacing**: if a game is racing or not, a boolean attribute
 
+This entity is designed with the following assumptions:
+1. There is a predefined set of genres for a game that games either belong to or don't 
+2. Each game can belong to multiple genres
+   
 #### 7. Platform
 This is an entity about what platforms a game supports
 1. **platformID**: a unique identifier for a games' supported platforms
@@ -84,6 +105,9 @@ This is an entity about the play styles of the game
 4. **categoryMultiplayer**: if a game has multiplayer functionality, a boolean attribute
 5. **categoryCoop** if a game has co-op functionality, a boolean attribute
 6. **categoryMMO**: if a game has MMO functionality, a boolean attribute
+
+This entity is designed with the following assumptions:
+1. Every game can be part of multple categories for play style
 
 
 ## Relations
