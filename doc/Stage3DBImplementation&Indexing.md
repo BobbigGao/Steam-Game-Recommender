@@ -1,4 +1,6 @@
-# DDL Commands 
+# Database Implementation and Indexing 
+
+## DDL Commands 
 
 ``` SQL
 CREATE TABLE UserInfo(
