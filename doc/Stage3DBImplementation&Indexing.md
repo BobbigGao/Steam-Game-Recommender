@@ -1,5 +1,8 @@
 # Database Implementation and Indexing 
 
+## GCP Connection 
+![GCP_connect](./images/GCPConnection.jpg)
+
 ## DDL Commands 
 
 ``` SQL
