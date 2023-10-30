@@ -211,7 +211,7 @@ Here we will convert the database design into 11 tables
 **1. UserInfo**
 ```mysql
 UserInfo(
-    userID VARCHAR(255) [PK],
+    userID INT [PK],
     userName VARCHAR(255),
     password VARCHAR(255),
 )
@@ -220,7 +220,7 @@ UserInfo(
 **2. GameInfo**
 ```mysql
 GameInfo(
-    queryID VARCHAR(255) [PK],
+    queryID INT [PK],
     queryName VARCHAR(255),
     releaseDate VARCHAR(255),
     priceFinal FLOAT,
