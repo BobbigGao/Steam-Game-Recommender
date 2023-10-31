@@ -98,7 +98,7 @@ To populate these tables with relevant and comprehensive data, we have sourced o
 
 As of now, we have successfully inserted a substantial volume of data—13,304 tuples—across these tables, demonstrating the project's progress and the breadth of information being managed. This is a significant milestone indicating that we have a substantial base of game data to work with.
 
-![GCPShowTables](./images/GCPShowTables.png)
+![GCPShowTable](./images/GCPShowTable.png)
 
 
 ## Advanced SQL Queries
