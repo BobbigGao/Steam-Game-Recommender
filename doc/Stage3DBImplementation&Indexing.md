@@ -40,12 +40,15 @@ CREATE TABLE MyList (
   FOREIGN KEY (userID) REFERENCES UserInfo(userID) ON DELETE CASCADE
 );
 
-CREATE TABLE Review (
-  commendID INT,
+CREATE TABLE Reviews (
+  commentID INT,
   userID INT,
   queryID INT,
   commentText VARCHAR(1000),
-  ratingDate, 
+  ratingDate,
+  PRIMARY KEY (commentID, queryID, userID),
+  FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  FOREIGN KEY (userID) REFERENCES UserInfo(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE Genre (
