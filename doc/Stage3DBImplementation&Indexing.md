@@ -104,8 +104,6 @@ As of now, we have successfully inserted a substantial volume of data—13,304 t
 ## Advanced SQL Queries
 Query-1 -- Popular Games Tendency
 
-The given SQL query retrieves information about games that belong to the "Action" genre and are available on both Windows and Mac platforms. The information is categorized based on the final price of the game into four distinct categories: "FREE", "Cheap", "Middle", and "Expensive". The query then combines the results of these four categories using the UNION operator to provide a unified list.
-
 ```mysql
 SELECT 
     g.headerImage,
@@ -138,6 +136,9 @@ INNER JOIN platform p ON g.queryID = p.queryID;
 ```
 
 Query-2 -- 'Action' Game price detection
+
+The given SQL query retrieves information about games that belong to the "Action" genre and are available on both Windows and Mac platforms. The information is categorized based on the final price of the game into four distinct categories: "FREE", "Cheap", "Middle", and "Expensive". The query then combines the results of these four categories using the UNION operator to provide a unified list.
+
 ```mysql
 SELECT DISTINCT queryName, releaseDate, priceFinal, "FREE" AS Price_Status, detailedDescrip, supportedLanguages
 FROM gameInfo
