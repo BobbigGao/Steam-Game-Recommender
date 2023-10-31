@@ -140,8 +140,8 @@ SELECT DISTINCT queryName, releaseDate, priceFinal, "FREE" AS Price_Status, deta
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal = 0 AND EXISTS (SELECT QueryID 
-															FROM platform
-															WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+		FROM platform
+		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 
 UNION
 
@@ -149,8 +149,8 @@ SELECT DISTINCT queryName, releaseDate, priceFinal, "Cheap" AS Price_Status, det
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal BETWEEN 1 AND 10 AND EXISTS (SELECT QueryID 
-																		 FROM platform
-																		 WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+		FROM platform
+        WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 
 UNION
 
@@ -158,8 +158,8 @@ SELECT DISTINCT queryName, releaseDate, priceFinal, "Middle" AS Price_Status, de
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal BETWEEN 11 AND 15 AND EXISTS (SELECT QueryID 
-																		  FROM platform
-																		  WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+		FROM platform
+		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 
 UNION
 
@@ -167,8 +167,8 @@ SELECT DISTINCT queryName, releaseDate, priceFinal, "Expensive" AS Price_Status,
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal > 15 AND EXISTS (SELECT QueryID 
-	                                                         FROM platform
-	                                                         WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+		FROM platform
+		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 ```
 
 ## Indexing Analysis
