@@ -134,7 +134,42 @@ FROM (
 INNER JOIN platform p ON g.queryID = p.queryID;
 ```
 
-Query-2
+Query-2 -- 'Action' Game price detection
+```mysql
+SELECT DISTINCT queryName, releaseDate, priceFinal, "FREE" AS Price_Status, detailedDescrip, supportedLanguages
+FROM gameInfo
+JOIN genre USING (queryID) 
+WHERE genrelsAction = 'True' AND priceFinal = 0 AND EXISTS (SELECT QueryID 
+	FROM platform
+	WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+
+UNION
+
+SELECT DISTINCT queryName, releaseDate, priceFinal, "Cheap" AS Price_Status, detailedDescrip, supportedLanguages
+FROM gameInfo
+JOIN genre USING (queryID) 
+WHERE genrelsAction = 'True' AND priceFinal BETWEEN 1 AND 10 AND EXISTS (SELECT QueryID 
+	FROM platform
+	WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+
+UNION
+
+SELECT DISTINCT queryName, releaseDate, priceFinal, "Middle" AS Price_Status, detailedDescrip, supportedLanguages
+FROM gameInfo
+JOIN genre USING (queryID) 
+WHERE genrelsAction = 'True' AND priceFinal BETWEEN 11 AND 15 AND EXISTS (SELECT QueryID 
+	FROM platform
+	WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+
+UNION
+
+SELECT DISTINCT queryName, releaseDate, priceFinal, "Expensive" AS Price_Status, detailedDescrip, supportedLanguages
+FROM gameInfo
+JOIN genre USING (queryID) 
+WHERE genrelsAction = 'True' AND priceFinal > 15 AND EXISTS (SELECT QueryID 
+	FROM platform
+	WHERE PlatformWindows = 'True' AND PlatformMac = 'True');   
+```
 
 ## Indexing Analysis
 
