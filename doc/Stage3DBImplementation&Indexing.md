@@ -150,7 +150,7 @@ FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal BETWEEN 1 AND 10 AND EXISTS (SELECT QueryID 
 		FROM platform
-        WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
+                WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 
 UNION
 
