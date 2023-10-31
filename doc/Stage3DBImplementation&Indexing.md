@@ -91,7 +91,15 @@ CREATE TABLE CategoryInfo(
 ```
 
 ## Data Insertation
-During this stage, we will focus on game info and its various aspects. We are utilising GameInfo, category, platform, and genre, and inserting data into these four tables. 
+During this stage, we will focus on game info and its various aspects. We are utilising gameInfo, category, platform, genre, recommendation, and inserting data into these four tables. We will not yet be auto-generating data representing users, reviews, or user-curated lists (myLists), and this will be implemented in the next stage. 
+
+
+To populate these tables with relevant and comprehensive data, we have sourced our initial dataset from a curated collection on data.world, specifically from the repository "steam-game-data" provided by Craig Kelly (https://data.world/craigkelly/steam-game-data). This dataset includes detailed listings of games offered through Steam, encapsulating a variety of metadata.
+
+As of now, we have successfully inserted a substantial volume of data—13,304 tuples—across these tables, demonstrating the project's progress and the breadth of information being managed. This is a significant milestone indicating that we have a substantial base of game data to work with.
+
+![GCPShowTables](./images/GCPShowTables.png)
+
 
 ## Advanced SQL Queries
 
