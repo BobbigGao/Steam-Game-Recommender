@@ -102,7 +102,7 @@ As of now, we have successfully inserted a substantial volume of data—13,304 t
 
 
 ## Advanced SQL Queries
-Query-1
+Query-1 -- Popular Games Tendency
 ```mysql
 SELECT 
     g.headerImage,
@@ -133,6 +133,9 @@ FROM (
 ) g 
 INNER JOIN platform p ON g.queryID = p.queryID;
 ```
+
+Query-2
+
 ## Indexing Analysis
 
 
