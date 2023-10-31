@@ -126,10 +126,10 @@ FROM (
     INNER JOIN 
         recommendation r ON r.queryID = g.queryID
     WHERE 
-        YEAR(STR_TO_DATE(releaseDate, '%b %e %Y')) BETWEEN '1980' AND '2020'
+        YEAR(STR_TO_DATE(releaseDate, '%b %e %Y')) BETWEEN '1980' AND '2020' -- replace by the time slot the user what to filter
     ORDER BY 
         r.RecommendationCount DESC
-    LIMIT 50
+    LIMIT 50 -- replace by the number of games the user what to show
 ) g 
 INNER JOIN platform p ON g.queryID = p.queryID;
 ```
