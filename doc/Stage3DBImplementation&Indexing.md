@@ -1,7 +1,9 @@
 # Database Implementation and Indexing 
 
 ## GCP Connection 
+We implement Steam Games database via Google Cloud Platform. Below demonstrates the successful connection to the database. 
 ![GCPConnection](./images/GCPConnection.png)
+We used the show tables command to see tables implemented in the databse.
 
 ## DDL Commands 
 
@@ -86,5 +88,13 @@ CREATE TABLE CategoryInfo(
   PRIMARY KEY (categoryID, queryID),
   FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE
 );
+```
+
+## Data Insertation
+During this stage, we will focus on game info and its various aspects. We are utilising GameInfo, category, platform, and genre, and inserting data into these four tables. 
+
+## Advanced SQL Queries
+
+## Indexing Analysis
 
 
