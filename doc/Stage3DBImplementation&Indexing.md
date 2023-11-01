@@ -102,7 +102,7 @@ As of now, we have successfully inserted a substantial volume of data—13,304 t
 
 
 ## Advanced SQL Queries
-Query-1 -- Popular Games Tendency
+### Query-1 -- Popular Games Tendency
 This SQL query provides the most popular games that were released within a specific year range and also shows whether the games are supported by Mac, Linux, and Windows. The users could select the year range they are interested in.
 ```mysql
 SELECT 
@@ -139,7 +139,7 @@ ORDER BY g.RecommendationCount DESC;
 
 
 
-Query-2 -- 'Action' Game price detection
+### Query-2 -- 'Action' Game price detection
 
 The given SQL query retrieves information about games that belong to the "Action" genre and are available on both Windows and Mac platforms. The information is categorized based on the final price of the game into four distinct categories: "FREE", "Cheap", and "Expensive". The query then combines the results of these three categories using the UNION operator to provide a unified list.
 
@@ -175,7 +175,9 @@ LIMIT 5)
 <img width="1512" alt="Screenshot 2023-11-01 at 2 45 07 PM" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/f6ed30e8-7936-4337-b1f7-c8a34c4a677b">
 
 ## Indexing Analysis
+
 ### Query-1
+
 Run ```EXPLAIN ANALYZE``` for the first query, the output is:
 img width="1817" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/f081881d-c1e4-4918-8f80-799b23d63a62"
 <img width="1475" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/b9e8198d-eef1-4303-b204-7cbb370afb8e">
@@ -223,6 +225,7 @@ Finally, when an index is added to the queryID column of the platform table, the
 
 
 ### Query-2
+
 Run ```EXPLAIN ANALYZE``` for the second query, the output is:
 <img width="1512" alt="ORIGINAL" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/dc9490d9-d9be-49cb-befc-cd35ec677da3">
 
