@@ -127,12 +127,13 @@ FROM (
     INNER JOIN 
         recommendation r ON r.queryID = g.queryID
     WHERE 
-        YEAR(STR_TO_DATE(releaseDate, '%b %e %Y')) BETWEEN '1980' AND '2020' -- replace by the time slot the user what to filter
+        YEAR(STR_TO_DATE(releaseDate, '%b %e %Y')) BETWEEN '1980' AND '2020'
     ORDER BY 
         r.RecommendationCount DESC
-    LIMIT 50 -- replace by the number of games the user what to show
+    LIMIT 15
 ) g 
-INNER JOIN platform p ON g.queryID = p.queryID;
+INNER JOIN platform p ON g.queryID = p.queryID
+ORDER BY g.RecommendationCount DESC;
 ```
 <img width="1597" alt="IMG_8538" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/a86a2338-668b-4b65-803a-d2e0a5b1c678">
 
