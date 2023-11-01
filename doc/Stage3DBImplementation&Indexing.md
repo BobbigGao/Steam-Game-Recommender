@@ -198,11 +198,8 @@ Then, we created an index on ```queryID``` of the recommendation table.
 CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
 ```
 Result:
+<img width="1816" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/322e1bff-42a1-49a0-8610-ba7fae0a5dc8">
 
-
-
-Next, 
-```r.RecommendationCount DESC```
 
 
 
