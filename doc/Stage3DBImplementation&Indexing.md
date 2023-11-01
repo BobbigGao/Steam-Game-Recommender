@@ -222,6 +222,29 @@ On the second attempt, the creation of an index on the RecommendationCount colum
 Finally, when an index is added to the queryID column of the platform table, the result demonstrates a reduction in the "actual time" for executing the query. However, the estimated "cost" values did not exhibit any noticeable change. This is the same reason as the first case. The queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
 
 
+### Query-2
+Run ```EXPLAIN ANALYZE``` for the second query, the output is:
+<img width="1512" alt="ORIGINAL" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/dc9490d9-d9be-49cb-befc-cd35ec677da3">
+
+To optimize the query and reduce the cost, creating appropriate indexes can help.
+
+First we created an index on ```queryID``` of the gameinfo table:
+```mysql
+CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
+```
+<img width="1512" alt="QUERYID" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/57b4b369-792f-4d83-be7f-b788878f4aee">
+
+Then, we created an index on ```PlatformWindows``` of the platform table.
+```mysql
+CREATE INDEX idx_Windows_on_pt ON platform(PlatformWindows);
+```
+<img width="1512" alt="Windows" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/65828423-f5c7-488f-bf2b-b19150f17527">
+
+Next, we created an index on ```PlatformMac``` of the platform table.
+```mysql
+CREATE INDEX idx_Mac_on_pt ON platform(PlatformMac);
+```
+<img width="1512" alt="Screenshot 2023-11-01 at 3 41 34 PM" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/1c6e23fd-29b9-4214-b566-2a0e672b1cc3">
 
 
 
