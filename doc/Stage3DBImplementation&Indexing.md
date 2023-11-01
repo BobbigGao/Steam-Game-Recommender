@@ -192,7 +192,7 @@ Result:
 <img width="1829" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/58e1034b-d208-41aa-93ae-c223de901cc6">
 Notice that the actual time becomes shorter, but the cost values remain the same.
 
-Then, we created an index on ```queryID``` of the recommendation table.
+Then, we created an index on ```RecommendationCount``` of the recommendation table.
 
 ```mysql
 CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
