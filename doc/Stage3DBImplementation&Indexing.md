@@ -176,5 +176,19 @@ WHERE genrelsAction = 'True' AND priceFinal > 15 AND EXISTS (SELECT QueryID
 ```
 
 ## Indexing Analysis
+### Query-1
+Run ```EXPLAIN ANALYZE``` for the first query, the output is:
+<img width="1817" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/f081881d-c1e4-4918-8f80-799b23d63a62">
+
+To optimize the query and reduce the cost, creating appropriate indexes can help.
+
+First we created an index on ```p.QueryID```:
+```mysql
+CREATE INDEX idx_queryID_on_p ON p(QueryID);
+```
+
+, ```r.queryID```, and ```r.RecommendationCount DESC```
+
+
 
 
