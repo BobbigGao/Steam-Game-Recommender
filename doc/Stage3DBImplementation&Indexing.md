@@ -179,7 +179,6 @@ LIMIT 5)
 ### Query-1
 
 Run ```EXPLAIN ANALYZE``` for the first query, the output is:
-img width="1817" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/f081881d-c1e4-4918-8f80-799b23d63a62"
 <img width="1475" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/b9e8198d-eef1-4303-b204-7cbb370afb8e">
 
 
@@ -190,7 +189,6 @@ First we created an index on ```queryID``` of the gameinfo table:
 CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
 ```
 Result:
-img width="1829" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/58e1034b-d208-41aa-93ae-c223de901cc6"
 <img width="1477" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/cebf4980-e9aa-4fec-837a-ecf6aafff728">
 
 
@@ -209,7 +207,6 @@ Next, we created an index on ```queryID``` of the platform table.
 CREATE INDEX idx_queryID_on_platform ON platform(queryID);
 ```
 Result:
-img width="1466" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/65b22bd5-5034-452f-a245-3ff05f9d75f1"
 <img width="1486" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/66d24d2a-8f9b-4578-b201-d4250d94c4d7">
 
 
@@ -218,7 +215,7 @@ Analysis of the result:
 When an index is added to the queryID column of the gameinfo table, the result demonstrates a reduction in the "actual time" for executing the query. However, the estimated "cost" values did not exhibit any noticeable change. This phenomenon can be attributed to the fact that the queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
 
 
-On the second attempt, the creation of an index on the RecommendationCount column of the recommendation table has led to a marked optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the RecommendationCount in descending order, as indicated by the cost of 1481.15 for the sort operation. Post index creation, this sorting operation's cost dropped significantly to a mere 0.1. This indicates that the database is now able to efficiently utilize the idx_recommendation_count index to quickly retrieve rows based on the RecommendationCount values. Moreover, the overall cost associated with the nested loop inner join decreased from 6831.66 to 3898.71, reflecting a more efficient data retrieval process. The actual execution time also showcased improvement: the query execution reduced from 34.236 seconds to 22.253 seconds, which translates to a 35% reduction in time.
+On the second attempt, the creation of an index on the RecommendationCount column of the recommendation table has led to a marked optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the RecommendationCount in descending order, as indicated by the cost of 1481.15 for the sort operation. Post index creation, this cost dropped significantly to a mere 0.03. This indicates that the database is now able to efficiently utilize the idx_recommendation_count index to quickly retrieve rows based on the RecommendationCount values. Moreover, the overall cost associated with the nested loop inner join decreased from 6831.66 to 3898.71, reflecting a more efficient data retrieval process. The actual execution time also showcased improvement: the query execution reduced from 34.236 seconds to 22.253 seconds, which translates to a 35% reduction in time.
 
 
 Finally, when an index is added to the queryID column of the platform table, the result demonstrates a reduction in the "actual time" for executing the query. However, the estimated "cost" values did not exhibit any noticeable change. This is the same reason as the first case. The queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
