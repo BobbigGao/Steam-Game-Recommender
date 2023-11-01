@@ -135,7 +135,8 @@ FROM (
 INNER JOIN platform p ON g.queryID = p.queryID
 ORDER BY g.RecommendationCount DESC;
 ```
-<img width="1597" alt="IMG_8538" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/a86a2338-668b-4b65-803a-d2e0a5b1c678">
+<img width="1479" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/896aa1c0-b7c5-4590-a2fc-76e073848776">
+
 
 
 Query-2 -- 'Action' Game price detection
