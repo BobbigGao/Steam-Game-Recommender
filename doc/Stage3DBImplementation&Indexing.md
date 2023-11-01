@@ -134,6 +134,8 @@ FROM (
 ) g 
 INNER JOIN platform p ON g.queryID = p.queryID;
 ```
+<img width="1597" alt="IMG_8538" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/a86a2338-668b-4b65-803a-d2e0a5b1c678">
+
 
 Query-2 -- 'Action' Game price detection
 
