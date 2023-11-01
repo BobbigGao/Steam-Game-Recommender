@@ -144,40 +144,43 @@ Query-2 -- 'Action' Game price detection
 The given SQL query retrieves information about games that belong to the "Action" genre and are available on both Windows and Mac platforms. The information is categorized based on the final price of the game into four distinct categories: "FREE", "Cheap", "Middle", and "Expensive". The query then combines the results of these four categories using the UNION operator to provide a unified list.
 
 ```mysql
-SELECT DISTINCT queryName, releaseDate, priceFinal, "FREE" AS Price_Status, detailedDescrip, supportedLanguages
+(SELECT DISTINCT queryName, releaseDate, priceFinal, "FREE" AS Price_Status, detailedDescrip, supportedLanguages
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal = 0 AND EXISTS (SELECT QueryID 
 		FROM platform
 		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
-LIMIT 5
+LIMIT 5)
+
 UNION
 
-SELECT DISTINCT queryName, releaseDate, priceFinal, "Cheap" AS Price_Status, detailedDescrip, supportedLanguages
+(SELECT DISTINCT queryName, releaseDate, priceFinal, "Cheap" AS Price_Status, detailedDescrip, supportedLanguages
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal BETWEEN 1 AND 10 AND EXISTS (SELECT QueryID 
 		FROM platform
                 WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
-LIMIT 5
+LIMIT 5)
+
 UNION
 
-SELECT DISTINCT queryName, releaseDate, priceFinal, "Middle" AS Price_Status, detailedDescrip, supportedLanguages
+(SELECT DISTINCT queryName, releaseDate, priceFinal, "Middle" AS Price_Status, detailedDescrip, supportedLanguages
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal BETWEEN 11 AND 15 AND EXISTS (SELECT QueryID 
 		FROM platform
 		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
-LIMIT 5
+LIMIT 5)
+
 UNION
 
-SELECT DISTINCT queryName, releaseDate, priceFinal, "Expensive" AS Price_Status, detailedDescrip, supportedLanguages
+(SELECT DISTINCT queryName, releaseDate, priceFinal, "Expensive" AS Price_Status, detailedDescrip, supportedLanguages
 FROM gameInfo
 JOIN genre USING (queryID) 
 WHERE genrelsAction = 'True' AND priceFinal > 15 AND EXISTS (SELECT QueryID 
 		FROM platform
 		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
-LIMIT 5
+LIMIT 5)
 ```
 
 ## Indexing Analysis
