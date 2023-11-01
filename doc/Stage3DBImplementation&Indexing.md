@@ -201,6 +201,13 @@ CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
 Result:
 <img width="1816" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/322e1bff-42a1-49a0-8610-ba7fae0a5dc8">
 
+Next, we created an index on ```queryID``` of the platform table.
+
+```mysql
+CREATE INDEX idx_queryID_on_platform ON platform(queryID);
+```
+Result:
+<img width="1466" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/65b22bd5-5034-452f-a245-3ff05f9d75f1">
 
 
 
