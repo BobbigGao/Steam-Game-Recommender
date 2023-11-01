@@ -172,6 +172,7 @@ WHERE genrelsAction = 'True' AND priceFinal > 10 AND EXISTS (SELECT QueryID
 		WHERE PlatformWindows = 'True' AND PlatformMac = 'True')
 LIMIT 5)
 ```
+<img width="1512" alt="Screenshot 2023-11-01 at 2 45 07 PM" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/f6ed30e8-7936-4337-b1f7-c8a34c4a677b">
 
 ## Indexing Analysis
 ### Query-1
