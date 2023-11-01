@@ -103,7 +103,7 @@ As of now, we have successfully inserted a substantial volume of data—13,304 t
 
 ## Advanced SQL Queries
 Query-1 -- Popular Games Tendency
-
+This SQL query provides the most popular games that were released within a specific year range and also shows whether the games are supported by Mac, Linux, and Windows. The users could select the year range they are interested in.
 ```mysql
 SELECT 
     g.headerImage,
