@@ -56,7 +56,6 @@ CREATE TABLE Reviews (
 
 CREATE TABLE Genre (
   genreID INT,
-  queryID INT,
   genrelsIndie BOOLEAN,
   genrelsAction BOOLEAN,
   genrelsAdventure BOOLEAN,
@@ -66,28 +65,23 @@ CREATE TABLE Genre (
   genrelsSimulation BOOLEAN,
   genrelsRacing BOOLEAN,
   PRIMARY KEY (genreID, queryID),
-  FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE
 );
 
 CREATE TABLE Platform(
   platformID VARCHAR(255),
-  queryID INT,
   platformWindows BOOLEAN,
   platformLinux BOOLEAN,
   platformMac BOOLEAN
   PRIMARY KEY (platformID, queryID),
-  FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE
 );
 
 CREATE TABLE CategoryInfo(
   categoryID VARCHAR(255) [PK]
-  queryID INT,
   categorySinglePlayer BOOLEAN,
   categoryMultiplayer BOOLEAN, 
   categoryCoop BOOLEAN,
   categoryMMO BOOLEAN
   PRIMARY KEY (categoryID, queryID),
-  FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE
 );
 ```
 Relationships
