@@ -290,10 +290,18 @@ Platform(
 ```mysql
 CategoryInfo(
     categoryID VARCHAR(255) [PK]
-    queryID VARCHAR(255) [FK to GameInfo.queryID],
+    queryID INT [FK to GameInfo.queryID],
     categorySinglePlayer BOOLEAN,
     categoryMultiplayer BOOLEAN, 
     categoryCoop BOOLEAN,
     categoryMMO BOOLEAN
 )
 ```
+
+**9. Search**
+```mysql
+Search(  
+  queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
+  PRIMARY KEY (queryID, userID)
+);
