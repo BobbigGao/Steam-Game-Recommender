@@ -97,6 +97,30 @@ CREATE TABLE Search(
   userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
   PRIMARY KEY (queryID, userID)
 );
+
+CREATE TABLE Belong(
+  queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  genreID INT REFERENCES Genre(genreID) ON DELETE CASCADE,
+  PRIMARY KEY (queryID, genreID)
+);
+
+CREATE TABLE Support(
+  queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  platformID INT REFERENCES Platform(platformID) ON DELETE CASCADE,
+  PRIMARY KEY (queryID, platformID)
+);
+
+CREATE TABLE Categorize(
+  queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  categoryID INT REFERENCES Category(categoryID) ON DELETE CASCADE,
+  PRIMARY KEY (queryID, categoryID)
+);
+
+CREATE TABLE Request(
+  recommendationID INT REFERENCES Recommendation(recommendationID) ON DELETE CASCADE,
+  userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
+  PRIMARY KEY (recommendationID, userID)
+);
 ```
 ## Data Insertation
 During this stage, we will focus on game info and its various aspects. We are utilising gameInfo, category, platform, genre, recommendation, and inserting data into these four tables. We will not yet be auto-generating data representing users, reviews, or user-curated lists (myLists), and this will be implemented in the next stage. 
