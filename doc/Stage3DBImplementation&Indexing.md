@@ -48,7 +48,7 @@ CREATE TABLE Reviews (
   userID INT,
   queryID INT,
   commentText VARCHAR(1000),
-  ratingDate,
+  ratingDate VARCHAR(255),
   PRIMARY KEY (commentID, queryID, userID),
   FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   FOREIGN KEY (userID) REFERENCES UserInfo(userID) ON DELETE CASCADE
