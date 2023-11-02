@@ -7,6 +7,7 @@ We used the show tables command to see tables implemented in the databse.
 
 ## DDL Commands 
 
+Entities
 ``` SQL
 CREATE TABLE UserInfo (
   userID INT PRIMARY KEY,
@@ -17,7 +18,7 @@ CREATE TABLE UserInfo (
 CREATE TABLE GameInfo (
   queryID INT PRIMARY KEY,
   queryName VARCHAR(255),
-  releaseDate XYZ,
+  releaseDate VARCHAR(255),
   priceFinal FLOAT,
   headerImage VARCHAR(255),
   detailedDescription VARCHAR(10000),
@@ -70,7 +71,7 @@ CREATE TABLE Genre (
 
 CREATE TABLE Platform(
   platformID VARCHAR(255),
-  queryID VARCHAR(255),
+  queryID INT,
   platformWindows BOOLEAN,
   platformLinux BOOLEAN,
   platformMac BOOLEAN
@@ -80,7 +81,7 @@ CREATE TABLE Platform(
 
 CREATE TABLE CategoryInfo(
   categoryID VARCHAR(255) [PK]
-  queryID VARCHAR(255) [FK to GameInfo.queryID],
+  queryID INT,
   categorySinglePlayer BOOLEAN,
   categoryMultiplayer BOOLEAN, 
   categoryCoop BOOLEAN,
@@ -89,7 +90,14 @@ CREATE TABLE CategoryInfo(
   FOREIGN KEY (queryID) REFERENCES GameInfo(queryID) ON DELETE CASCADE
 );
 ```
-
+Relationships
+```SQL
+CREATE TABLE Search(
+  queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
+  userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
+  PRIMARY KEY (genreID, queryID)
+);
+```
 ## Data Insertation
 During this stage, we will focus on game info and its various aspects. We are utilising gameInfo, category, platform, genre, recommendation, and inserting data into these four tables. We will not yet be auto-generating data representing users, reviews, or user-curated lists (myLists), and this will be implemented in the next stage. 
 
