@@ -304,31 +304,32 @@ Search(
   userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
   PRIMARY KEY (queryID, userID)
 );
-
+```
 **10. Belong**
 CREATE TABLE Belong(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   genreID INT REFERENCES Genre(genreID) ON DELETE CASCADE,
   PRIMARY KEY (queryID, genreID)
 );
-
+```
 **11. Support**
 CREATE TABLE Support(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   platformID INT REFERENCES Platform(platformID) ON DELETE CASCADE,
   PRIMARY KEY (queryID, platformID)
 );
-
+```
 **12. Categorize**
 CREATE TABLE Categorize(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   categoryID INT REFERENCES Category(categoryID) ON DELETE CASCADE,
   PRIMARY KEY (queryID, categoryID)
 );
-
+```
 **13. Request**
 CREATE TABLE Request(
   recommendationID INT REFERENCES Recommendation(recommendationID) ON DELETE CASCADE,
   userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
   PRIMARY KEY (recommendationID, userID)
 );
+```
