@@ -206,7 +206,7 @@ UserInfo: All attributes depend solely on the primary key, UserID.
 Given the functional dependencies and the structure of each table, all tables in the schema adhere to the 3NF requirements. All non-key attributes are fully functionally dependent on the primary key, and there are no transitive dependencies in the schema.
 
 ## Relational Schema
-Here we will convert the database design into 12 tables (11 entities, 1 relationship)
+Here we will convert the database design into 9 tables (8 entities, 1 relationship)
 
 **1. UserInfo**
 ```mysql
