@@ -95,7 +95,7 @@ Relationships
 CREATE TABLE Search(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
-  PRIMARY KEY (genreID, queryID)
+  PRIMARY KEY (queryID, userID)
 );
 ```
 ## Data Insertation
