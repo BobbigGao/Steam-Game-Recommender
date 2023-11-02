@@ -306,6 +306,7 @@ Search(
 );
 ```
 **10. Belong**
+```mysql
 CREATE TABLE Belong(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   genreID INT REFERENCES Genre(genreID) ON DELETE CASCADE,
@@ -313,6 +314,7 @@ CREATE TABLE Belong(
 );
 ```
 **11. Support**
+```mysql
 CREATE TABLE Support(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   platformID INT REFERENCES Platform(platformID) ON DELETE CASCADE,
@@ -320,6 +322,7 @@ CREATE TABLE Support(
 );
 ```
 **12. Categorize**
+```mysql
 CREATE TABLE Categorize(
   queryID INT REFERENCES GameInfo(queryID) ON DELETE CASCADE,
   categoryID INT REFERENCES Category(categoryID) ON DELETE CASCADE,
@@ -327,6 +330,7 @@ CREATE TABLE Categorize(
 );
 ```
 **13. Request**
+```mysql
 CREATE TABLE Request(
   recommendationID INT REFERENCES Recommendation(recommendationID) ON DELETE CASCADE,
   userID INT REFERENCES UserInfo(userID) ON DELETE CASCADE,
