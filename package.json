@@ -1,0 +1,14 @@
+{
+  "name": "fa23-cs411-team041-labo",
+  "version": "1.0.0",
+  "description": "The Steam Interactive Recommender Engine is a novel addition to the Steam platform, designed to redefine the game discovery experience. By harnessing a dynamic filtering system, it allows users to sift through games based on their individual preferences, ensuring they find titles that resonate with their interests. The system's intuitive interface simplifies the selection process, allowing gamers to effortlessly uncover gems within the vast Steam library.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

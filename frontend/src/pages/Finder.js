@@ -1,0 +1,1 @@
+// finder page (w/ search bar, filter... etc)
