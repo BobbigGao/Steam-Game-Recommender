@@ -206,35 +206,34 @@ LIMIT 5)
 ### Query-1
 
 Run ```EXPLAIN ANALYZE``` for the first query, the output is:
-<img width="1475" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/b9e8198d-eef1-4303-b204-7cbb370afb8e">
+<img width="1480" alt="QUERY1-origin" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/bd358ce3-00e4-4c28-bbdf-f4ae70e6acb2">
 
 
 To optimize the query and reduce the cost, creating appropriate indexes can help.
 
 First we created an index on ```queryID``` of the gameinfo table:
 ```mysql
-CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
+CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
 ```
-Result:
-<img width="1477" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/cebf4980-e9aa-4fec-837a-ecf6aafff728">
-
-
+Result: 
+<img width="1492" alt="query1-recommendation" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/afe5a705-97ed-42e5-8543-566a297e6deb">
 
 Then, we created an index on ```RecommendationCount``` of the recommendation table.
 
 ```mysql
-CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
+CREATE INDEX idx_FINALPREICE_on_gameInfo ON gameInfo(priceFinal);
 ```
 Result:
-<img width="1478" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/7951b3cd-c788-48ad-83b5-85a1ea281752">
+<img width="1506" alt="QUERY1-FINALPRICE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/fd25125d-f681-4ec7-8ce1-d63534ea6296">
+
 
 Next, we created an index on ```queryID``` of the platform table.
 
 ```mysql
-CREATE INDEX idx_queryID_on_platform ON platform(queryID);
+CREATE INDEX idx_releasedate ON gameInfo(releaseDate);
 ```
 Result:
-<img width="1486" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/66d24d2a-8f9b-4578-b201-d4250d94c4d7">
+<img width="1482" alt="QUERY1-RELEASEDATE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/c5baaf85-4674-4234-b494-e01c8802fb98">
 
 
 Analysis of the result:
