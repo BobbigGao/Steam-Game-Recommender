@@ -211,14 +211,14 @@ Run ```EXPLAIN ANALYZE``` for the first query, the output is:
 
 To optimize the query and reduce the cost, creating appropriate indexes can help.
 
-First we created an index on ```queryID``` of the gameinfo table:
+First we created an index on ```RecommendationCount``` of the recommendation table:
 ```mysql
 CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
 ```
 Result: 
 <img width="1492" alt="query1-recommendation" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/afe5a705-97ed-42e5-8543-566a297e6deb">
 
-Then, we created an index on ```RecommendationCount``` of the recommendation table.
+Then, we created an index on ```priceFinal``` of the gameInfo table.
 
 ```mysql
 CREATE INDEX idx_FINALPREICE_on_gameInfo ON gameInfo(priceFinal);
@@ -227,7 +227,7 @@ Result:
 <img width="1506" alt="QUERY1-FINALPRICE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/fd25125d-f681-4ec7-8ce1-d63534ea6296">
 
 
-Next, we created an index on ```queryID``` of the platform table.
+Next, we created an index on ```releaseDate``` of the gameInfo table.
 
 ```mysql
 CREATE INDEX idx_releasedate ON gameInfo(releaseDate);
@@ -250,27 +250,31 @@ Finally, when an index is added to the queryID column of the platform table, the
 ### Query-2
 
 Run ```EXPLAIN ANALYZE``` for the second query, the output is:
-<img width="1512" alt="ORIGINAL" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/dc9490d9-d9be-49cb-befc-cd35ec677da3">
+<img width="1499" alt="QUERY2-ORIGINAL" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/816561c6-7878-4681-a1e0-a5d399193cf2">
+
 
 To optimize the query and reduce the cost, creating appropriate indexes can help.
 
-First we created an index on ```queryID``` of the gameinfo table:
+First we created an index on ```releaseDate``` of the gameinfo table:
 ```mysql
-CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
+CREATE INDEX idx_realeasedate_on_gameInfo ON gameInfo(releaseDate);
 ```
-<img width="1512" alt="QUERYID" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/57b4b369-792f-4d83-be7f-b788878f4aee">
+<img width="1025" alt="QUERY2-RELEASEDATE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/b3209697-05cc-40ba-b203-b95c2933dcf7">
+
 
 Then, we created an index on ```PlatformWindows``` of the platform table.
 ```mysql
 CREATE INDEX idx_Windows_on_pt ON platform(PlatformWindows);
 ```
-<img width="1512" alt="Windows" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/65828423-f5c7-488f-bf2b-b19150f17527">
+<img width="1510" alt="QUERY2-WINDOWS" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/4e23e4fd-aaa6-4717-bd32-11442460937a">
+
 
 Next, we created an index on ```PlatformMac``` of the platform table.
 ```mysql
 CREATE INDEX idx_Mac_on_pt ON platform(PlatformMac);
 ```
-<img width="1512" alt="Screenshot 2023-11-01 at 3 41 34 PM" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/1c6e23fd-29b9-4214-b566-2a0e672b1cc3">
+<img width="1503" alt="QUERY2-MAC" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/4f387c10-c768-476f-9342-0f9656b2c05d">
+
 
 Analysis of the result:
 
