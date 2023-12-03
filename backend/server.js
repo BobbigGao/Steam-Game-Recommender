@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const cors = require('cors'); 
 
 const userRoutes = require('./routes/User');
+const finderRoutes = require('./routes/finder');
 const discoverRoutes = require('./routes/Discover');
 
 const db = mysql.createConnection({
@@ -28,8 +29,9 @@ app.use(express.json());
 
 app.use('/user', userRoutes(db));
 app.use('/discover', discoverRoutes(db));
+app.use('/finder', finderRoutes(db));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
