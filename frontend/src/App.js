@@ -8,6 +8,7 @@ import MyList from './pages/MyList';
 
 
 import './App.css';
+import Finder from './pages/Finder';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/finder" element={<Finder />} />
           <Route path="/" element={<Index />} />
           <Route path="/tendency" element={<Tendency />} /> 
           <Route path="/mylist" element={<MyList />} />
