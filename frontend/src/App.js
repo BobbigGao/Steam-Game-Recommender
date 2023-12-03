@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Index from './pages/Index';
 import './App.css';
+import Finder from './pages/Finder';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/finder" element={<Finder />} />
           <Route path="/" element={<Index />} />
         </Routes>
       </div>
