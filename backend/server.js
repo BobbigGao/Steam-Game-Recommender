@@ -6,6 +6,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/User');
 const discoverRoutes = require('./routes/Discover');
 const tendencyRoutes = require('./routes/Tendency');
+const myListRoutes = require('./routes/Mylist');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -30,7 +31,7 @@ app.use(express.json());
 app.use('/user', userRoutes(db));
 app.use('/discover', discoverRoutes(db));
 app.use('/tendency', tendencyRoutes(db)); 
-
+app.use('/mylist', myListRoutes(db));
 
 const port = process.env.PORT || 3001;
 

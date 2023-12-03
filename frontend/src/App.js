@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Index from './pages/Index';
 import Tendency from './pages/Tendency';
+import MyList from './pages/MyList';
+
 
 import './App.css';
 
@@ -16,6 +18,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Index />} />
           <Route path="/tendency" element={<Tendency />} /> 
+          <Route path="/mylist" element={<MyList />} />
         </Routes>
       </div>
     </Router>
