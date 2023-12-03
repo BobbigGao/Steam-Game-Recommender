@@ -206,79 +206,84 @@ LIMIT 5)
 ### Query-1
 
 Run ```EXPLAIN ANALYZE``` for the first query, the output is:
-<img width="1475" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/b9e8198d-eef1-4303-b204-7cbb370afb8e">
+<img width="1480" alt="QUERY1-origin" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/bd358ce3-00e4-4c28-bbdf-f4ae70e6acb2">
 
 
 To optimize the query and reduce the cost, creating appropriate indexes can help.
 
-First we created an index on ```queryID``` of the gameinfo table:
-```mysql
-CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
-```
-Result:
-<img width="1477" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/cebf4980-e9aa-4fec-837a-ecf6aafff728">
-
-
-
-Then, we created an index on ```RecommendationCount``` of the recommendation table.
-
+First we created an index on ```RecommendationCount``` of the recommendation table:
 ```mysql
 CREATE INDEX idx_recommendation_count ON recommendation(RecommendationCount);
 ```
-Result:
-<img width="1478" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/7951b3cd-c788-48ad-83b5-85a1ea281752">
+Result: 
+<img width="1492" alt="query1-recommendation" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/afe5a705-97ed-42e5-8543-566a297e6deb">
 
-Next, we created an index on ```queryID``` of the platform table.
+Then, we created an index on ```priceFinal``` of the gameInfo table.
 
 ```mysql
-CREATE INDEX idx_queryID_on_platform ON platform(queryID);
+CREATE INDEX idx_FINALPREICE_on_gameInfo ON gameInfo(priceFinal);
 ```
 Result:
-<img width="1486" alt="image" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/95501811/66d24d2a-8f9b-4578-b201-d4250d94c4d7">
+<img width="1506" alt="QUERY1-FINALPRICE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/fd25125d-f681-4ec7-8ce1-d63534ea6296">
+
+
+Next, we created an index on ```releaseDate``` of the gameInfo table.
+
+```mysql
+CREATE INDEX idx_releasedate ON gameInfo(releaseDate);
+```
+Result:
+<img width="1482" alt="QUERY1-RELEASEDATE" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/c5baaf85-4674-4234-b494-e01c8802fb98">
 
 
 Analysis of the result:
 
-When an index is added to the queryID column of the gameinfo table, the result demonstrates a reduction in the "actual time" for executing the query. However, the estimated "cost" values did not exhibit any noticeable change. This phenomenon can be attributed to the fact that the queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
+For the first attempt, the creation of an index on the RecommendationCount column of the recommendation table has led to a optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the RecommendationCount in descending order. Post index creation, this cost dropped significantly. This indicates that the database is now able to efficiently utilize the idx_recommendation_count index to quickly retrieve rows based on the RecommendationCount values. Moreover, the overall cost associated with the nested loop inner join decreased from 17468.91 to 14459.63, reflecting a more efficient data retrieval process. 
 
+For the second attempt, the creation of an index on the priceFinal column of the gameInfo also led to a optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the priceFinal in descending order, as indicated by the cost of 1553.9 for the sort operation. Post index creation, this cost dropped to a mere 1481.15. This indicates that the database is now able to efficiently utilize the idx_FINALPREICE_on_gameInfo index to quickly retrieve rows based on the priceFinal values. Moreover, the overall cost associated with the nested loop inner join decreased from 17468.91 to 6839.15, reflecting a more efficient data retrieval process. 
 
-On the second attempt, the creation of an index on the RecommendationCount column of the recommendation table has led to a marked optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the RecommendationCount in descending order, as indicated by the cost of 1481.15 for the sort operation. Post index creation, this cost dropped significantly to a mere 0.03. This indicates that the database is now able to efficiently utilize the idx_recommendation_count index to quickly retrieve rows based on the RecommendationCount values. Moreover, the overall cost associated with the nested loop inner join decreased from 6831.66 to 3895.14, reflecting a more efficient data retrieval process. The actual execution time also showcased improvement: the query execution reduced from 12 seconds to 0.17 seconds, which translates to a significant reduction in time.
+For the third attempt, the creation of an index on the releaseDate column of the gameInfo table has led to a optimization in query performance. Before the index was added, a major portion of the cost was attributed to sorting the releaseDate in descending order, as indicated by the cost of 1553.9 for the sort operation. Post index creation, this cost dropped significantly to a mere 1481.15. This indicates that the database is now able to efficiently utilize the idx_releasedate index to quickly retrieve rows based on the gameInfo values. Moreover, the overall cost associated with the nested loop inner join decreased from 17468.91 to 6839.05, reflecting a more efficient data retrieval process. 
 
-
-Finally, when an index is added to the queryID column of the platform table, the result demonstrates a reduction in the "actual time" for executing the query. However, the estimated "cost" values did not exhibit any noticeable change. This is the same reason as the first case. The queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
-
+Finally, the optimization for the idx_releasedate index get the most effective indexing performance by comparing the metrics for all three indexing analysis. 
 
 ### Query-2
 
 Run ```EXPLAIN ANALYZE``` for the second query, the output is:
-<img width="1512" alt="ORIGINAL" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/dc9490d9-d9be-49cb-befc-cd35ec677da3">
+<img width="1512" alt="QUERY2-ORIGIN" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/2d5d48da-9211-4f7e-bd80-698d14def91c">
+
+
 
 To optimize the query and reduce the cost, creating appropriate indexes can help.
 
-First we created an index on ```queryID``` of the gameinfo table:
+First we created an index on ```releaseDate``` of the gameinfo table:
 ```mysql
-CREATE INDEX idx_queryID_on_gameInfo ON gameInfo(queryID);
+CREATE INDEX idx_realeasedate_on_gameInfo ON gameInfo(releaseDate);
 ```
-<img width="1512" alt="QUERYID" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/57b4b369-792f-4d83-be7f-b788878f4aee">
+<img width="1512" alt="QUERY2-RELEASETIME" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/7b3461d8-d113-4bf2-974a-97e657c70909">
+
+
 
 Then, we created an index on ```PlatformWindows``` of the platform table.
 ```mysql
 CREATE INDEX idx_Windows_on_pt ON platform(PlatformWindows);
 ```
-<img width="1512" alt="Windows" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/65828423-f5c7-488f-bf2b-b19150f17527">
+<img width="1512" alt="QUERY-WINDOWS" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/d4695a3f-c970-4e94-b1e9-0038ae3426c0">
+
+
 
 Next, we created an index on ```PlatformMac``` of the platform table.
 ```mysql
 CREATE INDEX idx_Mac_on_pt ON platform(PlatformMac);
 ```
-<img width="1512" alt="Screenshot 2023-11-01 at 3 41 34 PM" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/1c6e23fd-29b9-4214-b566-2a0e672b1cc3">
+<img width="1512" alt="MAC-QUERY2" src="https://github.com/cs411-alawini/fa23-cs411-team041-LABO/assets/123212940/acc04dee-4448-4427-bf08-cbcd2ec7438d">
+
 
 Analysis of the result:
 
-Adding an index to the queryID column in the gameinfo table, which is already designated as the primary key, results in a persistently reduced actual time for query execution while the estimated cost values remain unchanged. This phenomenon can be attributed to the fact that the queryID is already designated as a primary key for the table. When we manually add an index to a column that's already a primary key, the database system may recognize this redundancy and opt to use the pre-existing primary key index for lookups rather than the manually created index. This would explain why the estimated "cost" remains consistent before and after the index creation.
+For the first attempt, the creation of an index on the releaseDate of the gameInfo table has led to a little bit optimization in query performance. The cost generated by 'Table scan on platform' didn't drop a lot, and the rows read by the system doesn't change. For the time process, it droped from 0.045 to 0.041. Thus, indexing for the releaseDate is not performed very well and let's try another two indexing next.
 
-On the second attempt, the creation of an index on the PlatformWindows of the platform table has led to a marked optimization in query performance. The cost generated by 'Table scan on platform' dropped from 154147.07 to 74869.97, and the rows read by the system dropped from 12316 to 6158, reflecting a more efficient data retrieval process. This indicates that the database is now able to efficiently utilize the idx_Windows_on_pt index to quickly retrieve rows based on the platform values.
+For the second attempt, the creation of an index on the PlatformWindows of the platform table has led to a optimization in query performance. The cost generated by 'Table scan on platform' dropped from 161325.54 to 74868.97, and the rows read by the system dropped from 12316 to 6158, reflecting a more efficient data retrieval process. This indicates that the database is now able to efficiently utilize the idx_Windows_on_pt index to quickly retrieve rows based on the platform values.
 
-Finally, the creation of an index on the PlatformMac of the platform table has also led to a marked optimization in query performance, even better than the indexing for PlatformMac. The cost generated by 'Table scan on platform' dropped from 154147.07 to 48017.6, and the rows read by the system dropped from 12316 to 4551, reflecting a more efficient data retrieval process. This indicates that the database is now able to efficiently utilize the idx_Mac_on_pt index to quickly retrieve rows based on the platform values.
+For the third attempt, the creation of an index on the PlatformMac of the platform table has also led to a marked optimization in query performance, even better than the indexing for PlatformWindows. The cost generated by 'Table scan on platform' dropped from 161325.54 to 48017.6, and the rows read by the system dropped from 12316 to 4551, reflecting a more efficient data retrieval process. This indicates that the database is now able to efficiently utilize the idx_Mac_on_pt index to quickly retrieve rows based on the platform values.
 
-
+Finally, the optimization for the idx_Mac_on_pt index get the most effective indexing performance by comparing the metrics for all three indexing analysis. 
