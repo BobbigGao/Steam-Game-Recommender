@@ -1,13 +1,13 @@
-// Discover.js
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import TitleBar from '../components/TitleBar';
+import { Link } from 'react-router-dom';
 import './Index.css';
 
 function Discover() {
     const [data, setData] = useState([]);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(10); // Corrected useState for limit
     const [activeButton, setActiveButton] = useState('Game');
+
     const [searchTerm, setSearchTerm] = useState('');
     const [genre, setGenre] = useState('All');
     const [priceRange, setPriceRange] = useState('Any');
@@ -102,22 +102,6 @@ function Discover() {
                 <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} />
               </Link><br />
               {item.detailedDescrip}
-            </li>
-          ))}
-        </ul>
-
-        {/* ... search and filter UI ... */}
-        <p>Data from backend:</p>
-        <ul>
-          {data.slice(0, limit).map((item, index) => (
-            <li key={index}>
-              <Link to={`/Game/${item.id}`}> {/* Replace 'item.id' with your unique game identifier */}
-                <strong>{item.queryName}</strong>
-              </Link>
-              {/* Other game details */}
-              <Link to={`/Game/${item.id}`}>
-                <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} />
-              </Link>
             </li>
           ))}
         </ul>
