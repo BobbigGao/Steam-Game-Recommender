@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Index from './pages/Index';
 import Tendency from './pages/Tendency';
 import MyList from './pages/MyList';
+import Game from './pages/Game';
 
 
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/tendency" element={<Tendency />} /> 
           <Route path="/mylist" element={<MyList />} />
+          <Route path="/Game/:game_index" element={<Game />} /> 
         </Routes>
       </div>
     </Router>

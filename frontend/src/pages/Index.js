@@ -1,9 +1,13 @@
 // first page
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import TitleBar from '../components/TitleBar';
+import './Index.css';
 
 function Index() {
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
+  const [activeButton, setActiveButton] = useState('Discover'); 
 
   useEffect(() => {
     fetch(`http://localhost:3000/discover/test-db?limit=${limit}`) 
@@ -12,8 +16,14 @@ function Index() {
       .catch(error => console.error('Error fetching data:', error));
   }, [limit]); 
 
+  const handleButtonClick = (buttonId) => {
+    setActiveButton(buttonId); // Update the active button state
+  };
+
   return (
     <div>
+      <TitleBar activeButton={activeButton} handleButtonClick={handleButtonClick} />
+
         <p>Select number of games:</p>
         <select onChange={e => setLimit(parseInt(e.target.value, 10))} value={limit}>
           <option value="5">5</option>
@@ -25,14 +35,15 @@ function Index() {
         <ul>
           {data.map((item, index) => (
             <li key={index}>
-              <strong>{item.queryName}</strong> - Released: {item.releaseDate}<br />
+              <Link to={`/Game/${index}`}><strong>{item.queryName}</strong></Link> - Released: {item.releaseDate}<br />
               Price: ${item.priceFinal}<br />
-              <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} /><br />
+              <Link to={`/Game/${index}`}><img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} /></Link><br />
               {item.detailedDescrip}
             </li>
           ))}
         </ul>
     </div>
+    
   );
 }
 
