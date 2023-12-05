@@ -47,6 +47,7 @@ module.exports = (db) => {
       }
       console.log('Login successful for user:', UserName);
       res.status(200).send('Login successful');
+      req.session.userID = user.UserID;
     });
   });
   return router;

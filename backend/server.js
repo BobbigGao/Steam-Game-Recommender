@@ -1,13 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
-const cors = require('cors'); 
+const cors = require('cors');
+const session = require('express-session');  // 引入 express-session
 
 const userRoutes = require('./routes/User');
 const finderRoutes = require('./routes/finder');
 const discoverRoutes = require('./routes/Discover');
 const tendencyRoutes = require('./routes/Tendency');
 const myListRoutes = require('./routes/Mylist');
+const reviewsRoutes = require('./routes/Reviews');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -25,15 +27,22 @@ db.connect((err) => {
 });
 
 const app = express();
-app.use(cors()); 
-app.use(express.json()); 
- 
+app.use(cors());
+app.use(express.json());
+
+// express-session
+app.use(session({
+  secret: '123456',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } 
+}));
 
 app.use('/user', userRoutes(db));
 app.use('/discover', discoverRoutes(db));
 app.use('/finder', finderRoutes(db));
-
-app.use('/tendency', tendencyRoutes(db)); 
+app.use('/reviews', reviewsRoutes(db));
+app.use('/tendency', tendencyRoutes(db));
 app.use('/mylist', myListRoutes(db));
 
 const port = process.env.PORT || 3001;
@@ -41,4 +50,3 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
