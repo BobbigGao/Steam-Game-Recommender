@@ -8,15 +8,17 @@ function Game() {
   const [reviewText, setReviewText] = useState(''); // State to store review text
   const [limit] = useState(10); // Fixed incorrect destructuring
   // Removed unused state [activeButton, setActiveButton]
-  let { game_index } = useParams();
-  game_index = parseInt(game_index, 10);
+  let { game_id } = useParams();
+  game_id = parseInt(game_id, 10);
+  const gameData = data.find(game => game.queryID === game_id);
+
 
   useEffect(() => {
-    fetch(`http://localhost:3000/discover/test-db?limit=${limit}`)
+    fetch(`http://localhost:3000/discover/test-db`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
-  }, [limit]);
+  }, []);
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +28,7 @@ function Game() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        queryID: data[game_index].queryID,
+        // queryID: data[game_index].queryID,
         commentText: reviewText,
       }),
     })
@@ -48,12 +50,12 @@ function Game() {
     <div>
       <TitleBar />
 
-      {data.length > game_index && (
+      {gameData && (
         <div>
-          <h1><strong>{data[game_index].queryName}</strong></h1> - Released: {data[game_index].releaseDate}<br />
-          Price: ${data[game_index].priceFinal}<br />
-          <img src={data[game_index].headerImage} alt={data[game_index].queryName} style={{ maxWidth: '200px' }} /><br />
-          {data[game_index].detailedDescrip}
+          <h1><strong>{gameData.queryName}</strong></h1> - Released: {gameData.releaseDate}<br />
+          Price: ${gameData.priceFinal}<br />
+          <img src={gameData.headerImage} alt={gameData.queryName} style={{ maxWidth: '200px' }} /><br />
+          {gameData.detailedDescrip}
 
           {/* Form to submit a review */}
           <form onSubmit={handleReviewSubmit}>

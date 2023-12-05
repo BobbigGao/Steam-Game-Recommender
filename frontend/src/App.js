@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/tendency" element={<Tendency />} /> 
           <Route path="/mylist" element={<MyList />} />
-          <Route path="/Game/:game_index" element={<Game />} /> 
+          <Route path="/Game/:game_id" element={<Game />} /> 
         </Routes>
       </div>
     </Router>

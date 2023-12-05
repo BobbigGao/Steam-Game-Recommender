@@ -93,12 +93,13 @@ function Discover() {
         <ul>
           {data.slice(0, limit).map((item, index) => (
             <li key={index}>
-              <Link to={`/Game/${index}`}>
+              <Link to={`/Game/${item.queryID}`}>
                 <strong>{item.queryName}</strong>
               </Link>
+              queryID: {item.queryID}
               - Released: {item.releaseDate}<br />
               Price: ${item.priceFinal}<br />
-              <Link to={`/Game/${index}`}>
+              <Link to={`/Game/${item.queryID}`}>
                 <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} />
               </Link><br />
 
