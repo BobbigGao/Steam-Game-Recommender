@@ -17,7 +17,7 @@ function Signup() {
         console.log('User created successfully');
         // redirect to index page
         window.location.href = "/";
-
+        //navigate("/"); 
       } else {
         console.error('Signup failed');
       }

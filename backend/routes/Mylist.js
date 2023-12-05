@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  // 获取用户的我的列表
+  // get user's mylist
   router.get('/:userID', (req, res) => {
     const { userID } = req.params;
     const query = `
@@ -20,10 +20,10 @@ module.exports = (db) => {
     });
   });
 
-  // 将游戏添加到我的列表
+  // add game to mylist
   router.post('/:userID', (req, res) => {
     const { userID } = req.params;
-    const { queryID } = req.body; // 游戏的 ID
+    const { queryID } = req.body; // ID of game
     const insertQuery = `
       INSERT INTO MyList (userID, queryID) VALUES (?, ?)
     `;

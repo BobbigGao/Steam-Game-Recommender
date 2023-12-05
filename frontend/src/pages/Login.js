@@ -1,10 +1,10 @@
-// login page
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Login() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,14 +16,17 @@ function Login() {
       });
       if (response.ok) {
         console.log('Login successful');
-        // redirect to index page
-        window.location.href = "/";
+        // Use navigate to redirect to index page
+        navigate("/index"); // Navigates to the index route
       } else {
         console.error('Login failed');
       }
     } catch (err) {
       console.error('Error:', err);
     }
+  };
+  const navigateToSignup = () => {
+    navigate("/signup"); // 使用你的注册页面的路由路径
   };
 
   return (
@@ -40,6 +43,7 @@ function Login() {
         </label>
         <br />
         <button type="submit">Login</button>
+        <button onClick={navigateToSignup} type="button">Do not have an account? Signup</button>
       </form>
     </div>
   );
