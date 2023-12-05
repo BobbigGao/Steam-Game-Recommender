@@ -96,7 +96,6 @@ function Discover() {
               <Link to={`/Game/${item.queryID}`}>
                 <strong>{item.queryName}</strong>
               </Link>
-              queryID: {item.queryID}
               - Released: {item.releaseDate}<br />
               Price: ${item.priceFinal}<br />
               <Link to={`/Game/${item.queryID}`}>
