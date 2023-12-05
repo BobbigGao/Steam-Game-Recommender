@@ -26,7 +26,7 @@ function Game() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // queryID: data[game_index].queryID,
+        queryID: gameData.queryID,
         commentText: reviewText,
       }),
     })
