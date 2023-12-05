@@ -4,25 +4,25 @@ import { Link } from 'react-router-dom';
 import TitleBar from '../components/TitleBar';
 import './Index.css';
 
+const ItemsPerPage = 10; // Set the number of items to display per page
+
 function Discover() {
     const [data, setData] = useState([]);
-    const [limit, setLimit] = useState(10);
     const [activeButton, setActiveButton] = useState('Game');
     const [searchTerm, setSearchTerm] = useState('');
     const [genre, setGenre] = useState('All');
     const [priceRange, setPriceRange] = useState('Any');
     const [sortBy, setSortBy] = useState('name');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-      fetch(`http://localhost:3000/discover/test-db?limit=${limit}`) 
+      fetch(`http://localhost:3000/discover/test-db`) 
         .then(response => response.json())
         .then(data => setData(data))
         .catch(error => console.error('Error fetching data:', error));
-    }, [limit]); 
-  
-    const handleButtonClick = (buttonId) => {
-      setActiveButton(buttonId);
-    };
+      setTotalPages(Math.ceil(data.length / ItemsPerPage));
+    }, [data]); 
   
     useEffect(() => {
       if (searchTerm) {
@@ -30,8 +30,9 @@ function Discover() {
           .then(response => response.json())
           .then(data => setData(data)) // Assuming you want to set data for games based on searchTerm
           .catch(error => console.error('Error fetching data:', error));
+        setTotalPages(Math.ceil(data.length / ItemsPerPage));
       }
-    }, [searchTerm]);
+    }, [searchTerm, data]);
     
     useEffect(() => {
       if (genre !== 'All' || priceRange !== 'Any') {
@@ -39,16 +40,31 @@ function Discover() {
           .then(response => response.json())
           .then(data => setData(data)) // Assuming you want to set data for games based on genre and priceRange
           .catch(error => console.error('Error fetching data:', error));
+        setTotalPages(Math.ceil(data.length / ItemsPerPage));
       }
-    }, [genre, priceRange]);    
+    }, [genre, priceRange, data]);
 
     useEffect(() => {
       fetch(`http://localhost:3000/finder/sort?sortBy=${sortBy}`)
         .then(response => response.json())
         .then(data => setData(data)) // Assuming you want to set data for games based on sortBy
         .catch(error => console.error('Error fetching data:', error));
-    }, [sortBy]);
+      setTotalPages(Math.ceil(data.length / ItemsPerPage));
+    }, [sortBy, data]);
     
+    const handleButtonClick = (buttonId) => {
+      setActiveButton(buttonId);
+    };
+
+    // Function to change page
+    const goToPage = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastItem = currentPage * ItemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - ItemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
     return (
       <div>
         <TitleBar activeButton={activeButton} handleButtonClick={handleButtonClick} />
@@ -81,17 +97,9 @@ function Discover() {
           <option value="priceFinal">Price</option>
           {/* Add more sort options */}
         </select>
-    
-        <p>Select number of games:</p>
-        <select onChange={e => setLimit(parseInt(e.target.value, 10))} value={limit}>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-    
-        <p>Data from backend:</p>
+
         <ul>
-          {data.slice(0, limit).map((item, index) => (
+          {currentItems.map((item, index) => (
             <li key={index}>
               <Link to={`/Game/${item.queryID}`}>
                 <strong>{item.queryName}</strong>
@@ -105,6 +113,16 @@ function Discover() {
             </li>
           ))}
         </ul>
+
+        <div>
+          <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+             Prev
+          </button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
 
       </div>
     );    
