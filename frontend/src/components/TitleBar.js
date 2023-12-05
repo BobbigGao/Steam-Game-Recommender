@@ -12,7 +12,7 @@ function TitleBar({ activeButton, handleButtonClick }) {
         onClick={() => handleButtonClick('Discover')}
       >Discover</Link> 
       <Link 
-        to="/Recommendation"
+        to="/Tendency"
         className={activeButton === 'Recommendation' ? 'active' : ''}
         onClick={() => handleButtonClick('Recommendation')}
       >Recommendation</Link> 

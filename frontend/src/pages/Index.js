@@ -101,26 +101,11 @@ function Discover() {
               <Link to={`/Game/${index}`}>
                 <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} />
               </Link><br />
-              {item.detailedDescrip}
+
             </li>
           ))}
         </ul>
 
-        {/* ... search and filter UI ... */}
-        <p>Data from backend:</p>
-        <ul>
-          {data.slice(0, limit).map((item, index) => (
-            <li key={index}>
-              <Link to={`/Game/${item.id}`}> {/* Replace 'item.id' with your unique game identifier */}
-                <strong>{item.queryName}</strong>
-              </Link>
-              {/* Other game details */}
-              <Link to={`/Game/${item.id}`}>
-                <img src={item.headerImage} alt={item.queryName} style={{ maxWidth: '200px' }} />
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
     );    
 }
