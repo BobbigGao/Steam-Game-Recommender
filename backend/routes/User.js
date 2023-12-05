@@ -45,9 +45,10 @@ module.exports = (db) => {
       if (!validPassword) {
         return res.status(401).send('Invalid username or password');
       }
+      req.session.userID = user.UserID;
       console.log('Login successful for user:', UserName);
       res.status(200).send('Login successful');
-      req.session.userID = user.UserID;
+      
     });
   });
   return router;
