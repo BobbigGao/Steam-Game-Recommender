@@ -38,7 +38,7 @@ app.use('/tendency', tendencyRoutes(db));
 app.use('/mylist', myListRoutes(db));
 app.use('/account', accountRoutes(db));
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

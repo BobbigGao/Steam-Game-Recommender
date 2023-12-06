@@ -1,31 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../components/AuthContext';
+import TitleBar from '../components/TitleBar';
+
 
 function Account() {
-  const [username, setUsername] = useState('');
+  const { logout } = useAuth();
+  const [activeButton, setActiveButton] = useState('Account');
 
-  useEffect(() => {
-    // Fetch the username from the backend
-    fetch('http://localhost:3000/account', {
-      credentials: 'include' // Needed to include the session cookie in the request
-    }) 
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch the username');
-      }
-      return response.json();
-    })
-    .then(data => setUsername(data.UserName))
-    .catch(error => console.error('Error:', error));
-  }, []);
+  const userName = localStorage.getItem('userName');
+  const userID = localStorage.getItem('userID');
+
+
 
   return (
     <div>
+      <TitleBar activeButton={activeButton} handleButtonClick={setActiveButton} />
+
       <h1>Account Details</h1>
-      {username ? (
-        <p>Welcome, {username}</p>
-      ) : (
-        <p>You are not logged in or could not fetch user details.</p>
-      )}
+      <p>Username: {userName}</p>
+      <p>User ID: {userID}</p>
+
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }

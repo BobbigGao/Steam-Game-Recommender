@@ -57,7 +57,7 @@ module.exports = (db) => {
       }
 
       console.log('Login successful for user:', UserName);
-      res.status(200).json({ message: 'Login successful', UserName: UserName, UserID: user.UserID });
+    res.status(200).json({ message: 'Login successful', UserName: UserName, UserID: user.UserID });
     });
   });
 

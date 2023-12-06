@@ -25,7 +25,6 @@ module.exports = (db) => {
     const { queryID } = req.body;
     const userID = req.session.userID; // 获取用户ID
 
-    // 检查是否已经有此游戏在MyList中
     const checkExistQuery = 'SELECT * FROM myList WHERE queryID = ? AND userID = ?';
     db.query(checkExistQuery, [queryID, userID], (existErr, existResults) => {
       if (existErr) {
@@ -46,7 +45,6 @@ module.exports = (db) => {
     });
   });
 
-  // 获取MyList中的游戏
   router.get('/mylist/:userID', (req, res) => {
     const userID = req.params.userID;
 

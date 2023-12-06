@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext'; // Import useAuth
+import { useAuth } from '../components/AuthContext'; 
 
 function Login() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
-  const { login } = useAuth(); // Get the login function from AuthContext
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {

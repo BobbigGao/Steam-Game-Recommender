@@ -1,6 +1,5 @@
 import React from 'react';
 import { AuthProvider, useAuth } from './components/AuthContext';
-import { ProtectedRoute } from './components/ProtectedRoute';
 import { BrowserRouter as Router, Routes, Route , Navigate} from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -12,7 +11,7 @@ import Discover from './pages/Discover';
 import Account from './pages/Account';
 import './App.css';
 
-function ProtectedRoutes() {
+function ProtectedRoute() {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -23,7 +22,7 @@ function ProtectedRoutes() {
       <Route path="/discover" element={isAuthenticated ? <Discover /> : <Navigate to="/index" />} />
 
             <Route path="/" element={isAuthenticated ? <Discover /> : <Navigate to="/index" />}/>
-            <Route path="/tendency" element={isAuthenticated ? <Tendency /> : <Navigate to="/index" />} /> 
+            <Route path="/recommended" element={isAuthenticated ? <Tendency /> : <Navigate to="/index" />} /> 
           <Route path="/mylist" element={isAuthenticated ? <MyList /> : <Navigate to="/index" />} />
           <Route path="/account" element={isAuthenticated ? <Account /> : <Navigate to="/index" />} />
           <Route path="/Game/:game_id" element={isAuthenticated ? <Game /> : <Navigate to="/index" />} /> 
@@ -36,7 +35,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <ProtectedRoutes />
+          <ProtectedRoute />
         </div>
       </Router>
     </AuthProvider>
