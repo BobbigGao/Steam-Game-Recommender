@@ -19,38 +19,46 @@ function Discover() {
     useEffect(() => {
       fetch(`http://localhost:3000/discover/test-db`) 
         .then(response => response.json())
-        .then(data => setData(data))
+        .then(newData => {
+          setData(newData);
+          setTotalPages(Math.ceil(newData.length / ItemsPerPage));
+        })
         .catch(error => console.error('Error fetching data:', error));
-      setTotalPages(Math.ceil(data.length / ItemsPerPage));
-    }, [data]); 
+    }, []); 
   
     useEffect(() => {
       if (searchTerm) {
         fetch(`http://localhost:3000/finder/search?searchTerm=${searchTerm}`)
           .then(response => response.json())
-          .then(data => setData(data)) // Assuming you want to set data for games based on searchTerm
+          .then(newData => {
+            setData(newData);
+            setTotalPages(Math.ceil(newData.length / ItemsPerPage));
+          })
           .catch(error => console.error('Error fetching data:', error));
-        setTotalPages(Math.ceil(data.length / ItemsPerPage));
       }
-    }, [searchTerm, data]);
+    }, [searchTerm]);
     
     useEffect(() => {
       if (genre !== 'All' || priceRange !== 'Any') {
         fetch(`http://localhost:3000/finder/filter?genre=${genre}&priceRange=${priceRange}`)
           .then(response => response.json())
-          .then(data => setData(data)) // Assuming you want to set data for games based on genre and priceRange
+          .then(newData => {
+            setData(newData);
+            setTotalPages(Math.ceil(newData.length / ItemsPerPage));
+          })
           .catch(error => console.error('Error fetching data:', error));
-        setTotalPages(Math.ceil(data.length / ItemsPerPage));
       }
-    }, [genre, priceRange, data]);
+    }, [genre, priceRange]);
 
     useEffect(() => {
       fetch(`http://localhost:3000/finder/sort?sortBy=${sortBy}`)
         .then(response => response.json())
-        .then(data => setData(data)) // Assuming you want to set data for games based on sortBy
+        .then(newData => {
+          setData(newData);
+          setTotalPages(Math.ceil(newData.length / ItemsPerPage));
+        })
         .catch(error => console.error('Error fetching data:', error));
-      setTotalPages(Math.ceil(data.length / ItemsPerPage));
-    }, [sortBy, data]);
+    }, [sortBy]);
     
     const handleButtonClick = (buttonId) => {
       setActiveButton(buttonId);
