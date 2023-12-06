@@ -7,7 +7,7 @@ function TitleBar({ activeButton, handleButtonClick }) {
   return (
     <div id="titleBar">
       <Link 
-        to="/"
+        to="/Discover"
         className={activeButton === 'Discover' ? 'active' : ''}
         onClick={() => handleButtonClick('Discover')}
       >Discover</Link> 
