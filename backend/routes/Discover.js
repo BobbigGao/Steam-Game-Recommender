@@ -24,7 +24,7 @@ module.exports = (db) => {
       if (results.length === 0) {
         return res.status(404).send('Game not found');
       }
-      res.json(results[0]); // Send the first (and presumably only) result
+      res.json(results[0]); 
     });
   });
   return router;

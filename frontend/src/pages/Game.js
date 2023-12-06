@@ -45,12 +45,12 @@ function Game() {
   };
 
   const handleAddToMyList = () => {
-    fetch(`http://localhost:3000/mylist/${userID}`, {
+    fetch('http://localhost:3000/mylist/addGameToMyList', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ queryID: gameData.queryID }),
+      body: JSON.stringify({ userID, gameID: gameData.queryID }),
     })
     .then(response => {
       if (response.ok) {
@@ -61,6 +61,7 @@ function Game() {
     .then(data => console.log('Game added to My List:', data))
     .catch(error => console.error('Error adding game to My List:', error));
   };
+  
 
   return (
     <div>

@@ -4,25 +4,28 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', (req, res) => { // Changed from '/details' to '/'
-    const userID = req.session.userID;
 
-    if (!userID) {
-      return res.status(403).send('User is not logged in.');
-    }
+  router.post('/updateUsername', (req, res) => {
+    const { userID, newUsername } = req.body;
+    const query = 'UPDATE userInfo SET UserName = ? WHERE UserID = ?';
+    db.query(query, [newUsername, userID], (err, results) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).send('Error updating username.');
+      }
+      res.send('Username updated successfully.');
+    });
+  });
 
-    const query = 'SELECT UserName FROM userInfo WHERE UserID = ?';
+  router.delete('/deleteAccount', (req, res) => {
+    const { userID } = req.body;
+    const query = 'DELETE FROM userInfo WHERE UserID = ?';
     db.query(query, [userID], (err, results) => {
       if (err) {
         console.error('Database error:', err);
-        return res.status(500).send('Error fetching user details.');
+        return res.status(500).send('Error deleting account.');
       }
-      if (results.length > 0) {
-        const { UserName } = results[0];
-        res.json({ UserName });
-      } else {
-        res.status(404).send('User not found.');
-      }
+      res.send('Account deleted successfully.');
     });
   });
 
