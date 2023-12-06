@@ -15,6 +15,11 @@ module.exports = (db) => {
     try {
       const hashedPassword = await bcrypt.hash(Password, 10);
       const UserID = uuidv4();
+      // const listID = uuidv4();
+      // const insertListIDQuery = 'INSERT INTO myList (listID, userID) VALUES (?, ?)';
+      // db.query(insertListIDQuery, [listID, newUser.userID], (err, result) => {
+      //   // errors may happen
+      // });
       const query = 'INSERT INTO userInfo (UserID, UserName, Password) VALUES (?, ?, ?)';
       db.query(query, [UserID, UserName, hashedPassword], (err, result) => {
         if (err) {

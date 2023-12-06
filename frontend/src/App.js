@@ -7,7 +7,7 @@ import Tendency from './pages/Tendency';
 import MyList from './pages/MyList';
 import Game from './pages/Game';
 import Discover from './pages/Discover';
-
+import Account from './pages/Account';
 import './App.css';
 import Finder from './pages/Finder';
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/index" element={<Index />} />
           <Route path="/tendency" element={<Tendency />} /> 
           <Route path="/mylist" element={<MyList />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/Game/:game_id" element={<Game />} /> 
         </Routes>
       </div>
