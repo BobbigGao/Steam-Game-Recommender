@@ -33,9 +33,10 @@ function Tendency() {
         <ul>
           {games.map((game, index) => (
             <li key={index}>
-              <Link to={`/Game/${game.queryID}`}><strong>{game.queryName}</strong></Link><br />
-              <Link to={`/Game/${game.queryID}`}><img src={game.headerImage} alt={game.queryName} style={{ maxWidth: '200px' }} /></Link><br />
+              <strong>{game.queryName}</strong><br />
+              <img src={game.headerImage} alt={game.queryName} style={{ maxWidth: '200px' }} /><br />
               Recommendations: {game.RecommendationCount}
+              Status: {game.status}
             </li>
           ))}
         </ul>

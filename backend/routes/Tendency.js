@@ -14,6 +14,7 @@ module.exports = (db) => {
       gameInfo.queryName, 
       gameInfo.headerImage, 
       gameInfo.priceFinal, 
+      gameInfo.status,
       recommendation.RecommendationCount 
     FROM recommendation
     INNER JOIN gameInfo ON recommendation.queryID = gameInfo.queryID 
