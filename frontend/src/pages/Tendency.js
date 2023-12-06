@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import TitleBar from '../components/TitleBar';
 
 function Tendency() {
@@ -32,8 +33,8 @@ function Tendency() {
         <ul>
           {games.map((game, index) => (
             <li key={index}>
-              <strong>{game.queryName}</strong> - Price: ${game.priceFinal}<br />
-              <img src={game.headerImage} alt={game.queryName} style={{ maxWidth: '200px' }} /><br />
+              <Link to={`/Game/${game.queryID}`}><strong>{game.queryName}</strong></Link> - Price: ${game.priceFinal}<br />
+              <Link to={`/Game/${game.queryID}`}><img src={game.headerImage} alt={game.queryName} style={{ maxWidth: '200px' }} /></Link><br />
               Recommendations: {game.recommendationCount}
             </li>
           ))}

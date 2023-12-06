@@ -38,6 +38,7 @@ module.exports = (db) => {
   
     const query = `
       SELECT 
+        gameInfo.queryID,
         gameInfo.queryName, 
         gameInfo.headerImage, 
         gameInfo.priceFinal, 
