@@ -4,13 +4,12 @@ const router = express.Router();
 
 module.exports = (db) => {
     router.post('/comment', async (req, res) => {
-        const {commentText } = req.body;
+        const {commentText, queryID } = req.body;
       
         try {
           const commentID = uuidv4(); 
           const ratingDate = new Date().toLocaleString();  
           const userID = req.session.userID;
-          const queryID = 10;
           const query = 'INSERT INTO reviews (commentID, userID, queryID, commentText, ratingDate) VALUES (?, ?, ?, ?, ?)';
           db.query(query, [commentID, userID, queryID, commentText, ratingDate], (err, result) => {
             if (err) {
