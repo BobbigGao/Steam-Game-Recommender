@@ -30,14 +30,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// express-session
-app.use(session({
-  secret: '123456',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } 
-}));
-
 app.use('/user', userRoutes(db));
 app.use('/discover', discoverRoutes(db));
 app.use('/finder', finderRoutes(db));
