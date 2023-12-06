@@ -10,7 +10,7 @@ const discoverRoutes = require('./routes/Discover');
 const tendencyRoutes = require('./routes/Tendency');
 const myListRoutes = require('./routes/Mylist');
 const reviewsRoutes = require('./routes/Reviews');
-
+const accountRoutes = require('./routes/Account');
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -44,6 +44,7 @@ app.use('/finder', finderRoutes(db));
 app.use('/reviews', reviewsRoutes(db));
 app.use('/tendency', tendencyRoutes(db));
 app.use('/mylist', myListRoutes(db));
+app.use('/account', accountRoutes(db));
 
 const port = process.env.PORT || 3001;
 
