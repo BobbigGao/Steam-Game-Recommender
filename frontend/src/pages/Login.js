@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../components/AuthContext'; // Import useAuth
 
 function Login() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize the navigate function
+  const { login } = useAuth(); // Get the login function from AuthContext
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,9 +17,11 @@ function Login() {
         body: JSON.stringify({ UserName, Password })
       });
       if (response.ok) {
-        console.log('Login successful');
-        // Use navigate to redirect to index page
-        navigate("/index"); // Navigates to the index route
+        const data = await response.json();
+        localStorage.setItem('userName', data.UserName); 
+        localStorage.setItem('userID', data.UserID);  
+        login();
+        navigate("/");
       } else {
         console.error('Login failed');
       }
@@ -25,8 +29,9 @@ function Login() {
       console.error('Error:', err);
     }
   };
+
   const navigateToSignup = () => {
-    navigate("/signup"); // 使用你的注册页面的路由路径
+    navigate("/signup");
   };
 
   return (

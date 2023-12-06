@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { BrowserRouter as Router, Routes, Route , Navigate} from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Index from './pages/Index';
@@ -9,26 +11,37 @@ import Game from './pages/Game';
 import Discover from './pages/Discover';
 import Account from './pages/Account';
 import './App.css';
-import Finder from './pages/Finder';
+
+function ProtectedRoutes() {
+  const { isAuthenticated } = useAuth();
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/index" element={<Index />} />
+      <Route path="/discover" element={isAuthenticated ? <Discover /> : <Navigate to="/index" />} />
+
+            <Route path="/" element={isAuthenticated ? <Discover /> : <Navigate to="/index" />}/>
+            <Route path="/tendency" element={isAuthenticated ? <Tendency /> : <Navigate to="/index" />} /> 
+          <Route path="/mylist" element={isAuthenticated ? <MyList /> : <Navigate to="/index" />} />
+          <Route path="/account" element={isAuthenticated ? <Account /> : <Navigate to="/index" />} />
+          <Route path="/Game/:game_id" element={isAuthenticated ? <Game /> : <Navigate to="/index" />} /> 
+    </Routes>
+  );
+}
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/finder" element={<Finder />} />
-          <Route path="/Discover" element={<Discover />} />
-          <Route path="/index" element={<Index />} />
-          <Route path="/tendency" element={<Tendency />} /> 
-          <Route path="/mylist" element={<MyList />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/Game/:game_id" element={<Game />} /> 
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <ProtectedRoutes />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
+

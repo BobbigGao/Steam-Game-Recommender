@@ -1,9 +1,12 @@
-// signup page
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../components/AuthContext'; // Import useAuth
 
 function Signup() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
+  const { login } = useAuth(); // Get the login function from AuthContext
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -11,13 +14,12 @@ function Signup() {
       const response = await fetch('http://localhost:3000/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ UserName: UserName, Password: Password })
+        body: JSON.stringify({ UserName, Password })
       });
       if (response.ok) {
         console.log('User created successfully');
-        // redirect to index page
-        window.location.href = "/";
-        //navigate("/"); 
+        login(); // Update the isAuthenticated state
+        navigate("/");
       } else {
         console.error('Signup failed');
       }
