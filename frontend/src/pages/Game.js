@@ -9,14 +9,6 @@ function Game() {
   const { game_id } = useParams(); 
   const gameData = data.find(game => game.queryID === parseInt(game_id, 10));
 
-  const userID = 'userID'; 
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/discover/test-db`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();
@@ -45,21 +37,25 @@ function Game() {
   };
 
   const handleAddToMyList = () => {
-    fetch(`http://localhost:3000/mylist/${userID}`, {
+    fetch('http://localhost:3000/mylist/addGameToMyList', { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ queryID: gameData.queryID }),
+      body: JSON.stringify({ gameID: gameData.queryID }),
     })
     .then(response => {
-      if (response.ok) {
-        return response.json();
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
       }
-      throw new Error('Network response was not ok.');
+      return response.json();
     })
-    .then(data => console.log('Game added to My List:', data))
-    .catch(error => console.error('Error adding game to My List:', error));
+    .then(data => {
+      console.log('Game added to My List:', data);
+    })
+    .catch(error => {
+      console.error('Error adding game to My List:', error);
+    });
   };
 
   return (
