@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext'; 
+import { useNavigate } from 'react-router-dom'; 
 
 function Login() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
-  const { login } = useAuth(); 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,11 +15,9 @@ function Login() {
         body: JSON.stringify({ UserName, Password })
       });
       if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('userName', data.UserName); 
-        localStorage.setItem('userID', data.UserID);  
-        login();
-        navigate("/");
+        console.log('Login successful');
+        // Use navigate to redirect to index page
+        navigate("/index"); // Navigates to the index route
       } else {
         console.error('Login failed');
       }
@@ -29,9 +25,8 @@ function Login() {
       console.error('Error:', err);
     }
   };
-
   const navigateToSignup = () => {
-    navigate("/signup");
+    navigate("/signup"); 
   };
 
   return (

@@ -8,13 +8,42 @@ function MyList() {
 
   useEffect(() => {
     if (userID) {
-      fetch(`http://localhost:3000/mylist/${userID}`)
+      fetch(`http://localhost:3001/mylist/${userID}`)
         .then(response => response.json())
         .then(data => setGames(data))
         .catch(error => console.error('Error fetching my list:', error));
     }
   }, [userID]); 
 
+ 
+  const handleAddGameToMyList = (queryID) => {
+    fetch('http://localhost:3001/mylist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+   
+      },
+      body: JSON.stringify({ queryID }),
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to add game to my list');
+      }
+    })
+    .then(data => {
+
+      return fetch(`http://localhost:3001/mylist/${userID}`);
+    })
+    .then(response => response.json())
+    .then(data => {
+      setGames(data); 
+    })
+    .catch(error => {
+      console.error('Error adding game to my list:', error);
+    });
+  };
 
 
   return (
@@ -28,6 +57,7 @@ function MyList() {
               <strong>{game.queryName}</strong> - Price: ${game.priceFinal}
               <br />
               <img src={game.headerImage} alt={game.queryName} style={{ maxWidth: '100px' }} />
+              <button onClick={() => handleAddGameToMyList(game.queryID)}>Add to My List</button>
             </li>
           ))}
         </ul>

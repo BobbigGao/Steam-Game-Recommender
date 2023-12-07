@@ -71,8 +71,8 @@ function Discover() {
         
         <select onChange={(e) => setPriceRange(e.target.value)} value={priceRange}>
           <option value="Any">Any Price</option>
-          <option value="20">Under $20</option>
-          <option value="50">Under $50</option>
+          <option value="5">Under $5</option>
+          <option value="10">Under $10</option>
           {/* Add more price ranges */}
         </select>
         

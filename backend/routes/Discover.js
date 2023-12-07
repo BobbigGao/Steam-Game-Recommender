@@ -13,19 +13,7 @@ module.exports = (db) => {
     });
   });
 
-  router.get('/game/:game_id', (req, res) => {
-    const gameId = req.params.game_id;
-    let sqlQuery = 'SELECT * FROM gameInfo WHERE queryID = ?';
+  // Add more discover-related routes here
 
-    db.query(sqlQuery, [gameId], (err, results) => {
-      if (err) {
-        return res.status(500).send('Error executing the query');
-      }
-      if (results.length === 0) {
-        return res.status(404).send('Game not found');
-      }
-      res.json(results[0]); 
-    });
-  });
   return router;
 };

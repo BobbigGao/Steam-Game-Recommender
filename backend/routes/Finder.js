@@ -15,20 +15,39 @@ module.exports = (db) => {
 
 
   // filter
+  // router.get('/filter', (req, res) => {
+  //   const {priceRange } = req.query;
+  //   db.query('SELECT * FROM gameInfo WHERE priceFinal <= ?', [`%${priceRange}%`], (err, results) => {
+  //     if (err) {
+  //       return res.status(500).send('Error executing the query');
+  //     }
+  //     res.json(results);
+  //   });
+  // });
   router.get('/filter', (req, res) => {
-    const { genre, priceRange } = req.query;
-    db.query('SELECT * FROM gameInfo WHERE genre = ? AND priceFinal <= ?', [genre, priceRange], (err, results) => {
-      if (err) {
-        return res.status(500).send('Error executing the query');
-      }
-      res.json(results);
+    const { priceRange } = req.query;
+
+    let query = 'SELECT * FROM gameInfo';
+    let params = [];
+
+    if (priceRange && priceRange !== 'Any') {
+        query += ' WHERE priceFinal <= ?';
+        params.push(priceRange);
+    }
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            return res.status(500).send('Error executing the query');
+        }
+        res.json(results);
     });
-  });
+});
+ 
 
   // sort
   router.get('/sort', (req, res) => {
     const { sortBy } = req.query;
-    db.query(`SELECT * FROM gameInfo ORDER BY ${sortBy}`, (err, results) => {
+    db.query(`SELECT * FROM gameInfo ORDER BY ${sortBy} DESC`, (err, results) => {
       if (err) {
         return res.status(500).send('Error executing the query');
       }

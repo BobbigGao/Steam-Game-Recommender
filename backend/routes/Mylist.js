@@ -1,63 +1,68 @@
+// const express = require('express');
+// const router = express.Router();
+
+// module.exports = (db) => {
+//   router.post('/add-to-mylist', (req, res) => {
+//     const { queryID } = req.body;
+//     const userID = req.session.userID;
+  
+//     // get listID
+//     const insertQuery = 'INSERT INTO myList (listID, queryID, userID) VALUES (?, ?, ?)';
+//     db.query(insertQuery, [listID, queryID, userID], (err, result) => {
+//       // ...
+//     });
+//   });  
+
+//     return router;
+// };
+
 const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+  // 添加游戏到MyList
+  router.post('/mylist', (req, res) => {
+    const { queryID } = req.body;
+    const userID = req.session.userID; // 获取用户ID
 
-  // stored procedure and trigger.
-  router.post('/addGameToMyList', (req, res) => {
-    const { userID, gameID } = req.body;
-    const query = 'CALL AddGameToUserList(?, ?)';
-    db.query(query, [userID, gameID], (err, results) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Error adding game to MyList');
-        }
-        res.status(200).send('Game added to MyList successfully');
+    // 检查是否已经有此游戏在MyList中
+    const checkExistQuery = 'SELECT * FROM myList WHERE queryID = ? AND userID = ?';
+    db.query(checkExistQuery, [queryID, userID], (existErr, existResults) => {
+      if (existErr) {
+        return res.status(500).send('Error checking for game in My List');
+      }
+      if (existResults.length > 0) {
+        return res.status(409).send('Game already in My List');
+      } else {
+        // 游戏不在MyList中，可以添加
+        const insertQuery = 'INSERT INTO myList (queryID, userID) VALUES (?, ?)';
+        db.query(insertQuery, [queryID, userID], (insertErr, insertResults) => {
+          if (insertErr) {
+            return res.status(500).send('Error adding game to My List');
+          }
+          return res.status(201).send('Game added to My List successfully');
+        });
+      }
     });
-});
+  });
+
+  // 获取MyList中的游戏
+  router.get('/mylist/:userID', (req, res) => {
+    const userID = req.params.userID;
+
+    const selectQuery = `
+      SELECT gi.queryID, gi.queryName, gi.priceFinal, gi.headerImage
+      FROM GameInfo gi
+      JOIN myList ml ON gi.queryID = ml.queryID
+      WHERE ml.userID = ?`;
+
+    db.query(selectQuery, [userID], (selectErr, results) => {
+      if (selectErr) {
+        return res.status(500).send('Error fetching My List');
+      }
+      return res.json(results);
+    });
+  });
 
   return router;
 };
-
-
-//procedure
-// CREATE DEFINER=`root`@`%` PROCEDURE `AddGameToUserList`(IN userID INT, IN queryID INT)
-// BEGIN
-// DECLARE totalCount INT;
-// DECLARE finished INTEGER DEFAULT 0;
-// DECLARE cur CURSOR FOR SELECT queryID FROM MyList WHERE userID = userID;
-// DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
-
-// INSERT INTO myList (userID, queryID) VALUES (userID, queryID);
-
-// OPEN cur;
-
-// my_loop: LOOP
-//   FETCH cur INTO queryID;
-//   IF finished = 1 THEN 
-//     LEAVE my_loop;
-//   END IF;
-
-//   SELECT COUNT(*) INTO totalCount FROM myList WHERE queryID = queryID;
-//   IF totalCount >= 3 THEN
-//     UPDATE gameInfo SET status = 'Popular' WHERE queryID = queryID;
-//   END IF;
-// END LOOP my_loop;
-
-// CLOSE cur;
-// END
-
-
-// trigger
-// DELIMITER //
-// CREATE TRIGGER IncrementRecommendationCount
-// AFTER INSERT ON UserGames
-// FOR EACH ROW
-// BEGIN
-//   -- Increment the recommendation count
-//   UPDATE Games
-//   SET recommendationCount = recommendationCount + 1
-//   WHERE queryID = NEW.queryID;
-// END //
-// DELIMITER ;
-

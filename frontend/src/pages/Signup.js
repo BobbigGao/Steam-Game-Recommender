@@ -1,30 +1,31 @@
+// signup page
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext'; // Import useAuth
 
 function Signup() {
   const [UserName, setUsername] = useState('');
   const [Password, setPassword] = useState('');
-  const { login } = useAuth(); // Get the login function from AuthContext
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage('');
     try {
       const response = await fetch('http://localhost:3000/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ UserName, Password })
+        body: JSON.stringify({ UserName: UserName, Password: Password })
       });
       if (response.ok) {
         console.log('User created successfully');
-        login(); // Update the isAuthenticated state
-        navigate("/");
+        window.location.href = "/";
       } else {
-        console.error('Signup failed');
+        const errorText = await response.text(); 
+        setErrorMessage(errorText); 
+        console.error('Signup failed:', errorText);
       }
     } catch (err) {
       console.error('Error:', err);
+      setErrorMessage('An unexpected error occurred');
     }
   };
 
@@ -41,6 +42,7 @@ function Signup() {
             <input type="password" value={Password} onChange={(e) => setPassword(e.target.value)} />
           </label>
           <br />
+          {errorMessage && <p className="error">{errorMessage}</p>}
           <button type="submit">Sign Up</button>
         </form>
     </div>

@@ -30,6 +30,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// express-session
+app.use(session({
+  secret: '123456',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } 
+}));
+
 app.use('/user', userRoutes(db));
 app.use('/discover', discoverRoutes(db));
 app.use('/finder', finderRoutes(db));
@@ -38,7 +46,7 @@ app.use('/tendency', tendencyRoutes(db));
 app.use('/mylist', myListRoutes(db));
 app.use('/account', accountRoutes(db));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

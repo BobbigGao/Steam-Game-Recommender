@@ -1,59 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext';
+import React, { useEffect, useState } from 'react';
 import TitleBar from '../components/TitleBar';
-
+import { useNavigate } from 'react-router-dom'; 
 
 function Account() {
-  const { logout } = useAuth();
-  const [newUsername, setNewUsername] = useState('');
-  const userID = localStorage.getItem('userID');
+  const [username, setUsername] = useState('');
+  const [activeButton, setActiveButton] = useState('Account');
+  const navigate = useNavigate();
 
-  const updateUsername = () => {
-    fetch('/api/updateUsername', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ userID, newUsername }),
+  useEffect(() => {
+    // Fetch the username from the backend
+    fetch('http://localhost:3000/account', {
+      credentials: 'include' // Needed to include the session cookie in the request
+    }) 
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch the username');
+      }
+      return response.json();
     })
-    .then(response => response.text())
-    .then(data => {
-      console.log(data);
-    });
+    .then(data => setUsername(data.UserName))
+    .catch(error => console.error('Error:', error));
+  }, []);
+
+  const navigateToSignup = () => {
+    navigate("/signup"); 
   };
 
-  const deleteAccount = () => {
-    if (window.confirm('Are you sure you want to delete your account?')) {
-      fetch('/api/deleteAccount', {
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ userID }),
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
-      });
-    }
-  };
-  
   return (
     <div>
       <TitleBar activeButton={activeButton} handleButtonClick={setActiveButton} />
-
       <h1>Account Details</h1>
-      <p>Username: {userName}</p>
-      <p>User ID: {userID}</p>
-
-
-      <input
-        type="text"
-        placeholder="Enter new username"
-        value={newUsername}
-        onChange={(e) => setNewUsername(e.target.value)}
-      />
-      <button onClick={updateUsername}>Update Username</button>
-      <button onClick={deleteAccount}>Delete Account</button>
-      <button onClick={logout}>Logout</button>
-
+      {username ? (
+        <p>Welcome, {username}</p>
+      ) : (
+        <p>You are not logged in or could not fetch user details.</p>
+      )}
+      <button onClick={navigateToSignup} type="button">Delete Account</button>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import TitleBar from '../components/TitleBar';
 function Game() {
   const [data, setData] = useState([]);
   const [reviewText, setReviewText] = useState('');
+  const [reviewSuccess, setReviewSuccess] = useState(false);
   const { game_id } = useParams(); 
   const gameData = data.find(game => game.queryID === parseInt(game_id, 10));
 
@@ -20,19 +21,22 @@ function Game() {
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();
+    setReviewSuccess(false);
     fetch('http://localhost:3000/reviews/comment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // queryID: data[game_index].queryID,
+        queryID: gameData.queryID,
         commentText: reviewText,
       }),
     })
     .then(response => {
       if (response.ok) {
-        return response.json();
+        console.log('Review submitted successfully');
+        setReviewSuccess(true);
+        //return response.json();
       }
       throw new Error('Network response was not ok.');
     })
@@ -45,12 +49,12 @@ function Game() {
   };
 
   const handleAddToMyList = () => {
-    fetch('http://localhost:3000/mylist/addGameToMyList', {
+    fetch(`http://localhost:3000/mylist/${userID}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userID, gameID: gameData.queryID }),
+      body: JSON.stringify({ queryID: gameData.queryID }),
     })
     .then(response => {
       if (response.ok) {
@@ -61,7 +65,6 @@ function Game() {
     .then(data => console.log('Game added to My List:', data))
     .catch(error => console.error('Error adding game to My List:', error));
   };
-  
 
   return (
     <div>
@@ -84,7 +87,8 @@ function Game() {
             <button type="submit">Submit Review</button>
           </form>
 
-          <button onClick={handleAddToMyList}>Save Game to My List</button>
+          {/* <button onClick={handleAddToMyList}>Save Game to My List</button> */}
+          {reviewSuccess && <p>Review Successfully</p>}
         </div>
       )}
     </div>

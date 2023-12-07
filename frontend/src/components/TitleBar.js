@@ -7,20 +7,20 @@ function TitleBar({ activeButton, handleButtonClick }) {
   return (
     <div id="titleBar">
       <Link 
-        to="/Discover"
+        to="/index"
         className={activeButton === 'Discover' ? 'active' : ''}
         onClick={() => handleButtonClick('Discover')}
       >Discover</Link> 
       <Link 
-        to="/Recommended"
-        className={activeButton === 'Recommended' ? 'active' : ''}
-        onClick={() => handleButtonClick('Recommended')}
-      >Recommended</Link> 
-      <Link 
+        to="/Tendency"
+        className={activeButton === 'Tendency' ? 'active' : ''}
+        onClick={() => handleButtonClick('Tendency')}
+      >Tendency</Link> 
+      {/* <Link 
         to="/MyList"
         className={activeButton === 'My List' ? 'active' : ''}
         onClick={() => handleButtonClick('My List')}
-      >My List</Link> 
+      >My List</Link>  */}
       <Link 
         to="/Account"
         className={activeButton === 'Account' ? 'active' : ''}
